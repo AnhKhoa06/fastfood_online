@@ -1,0 +1,363 @@
+* {
+  margin: 0%;
+  padding: 0%;
+  box-sizing: border-box;
+  font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+  max-width: 100%;
+}
+
+body {
+  padding-top: 120px !important;
+}
+
+.navb {
+  background-color: #e31837;
+  padding: 0px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.navb img {
+  width: 6%;
+  height: 6%;
+  margin-left: 50px;
+  margin-top: 30px;
+  transform: translateY(-5px);
+}
+.navb ul {
+  list-style-type: none;
+  display: flex;
+  justify-content: center;
+  padding-left: -50px;
+  margin-top: -50px;
+  font-weight: bold;
+  transform: translateX(-65px);
+}
+.menu button {
+  background-color: #e31837;
+  border: 0px solid white;
+  border-color: #e31837;
+  padding: 20px 13px;
+  font-size: 13px;
+  margin-left: 5px;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 15px 15px 0 0;
+  line-height: 1;
+  transition: all 0.3s ease;
+}
+.menu button:hover {
+  background-color: rgb(240, 217, 217);
+}
+.menu button:hover a {
+  color: #e31837;
+}
+
+/* ==================== MENU ACTIVE STATE (giống hover nhưng cố định) ==================== */
+.menu button.active,
+.menu button:active {
+  background-color: rgb(240, 217, 217) !important;
+}
+.menu button.active a,
+.menu button:active a {
+  color: #e31837 !important;
+  font-weight: 900;
+}
+
+/* Hover vẫn hoạt động bình thường (kết hợp active + hover thì ưu tiên active) */
+.menu button:hover:not(.active) {
+  background-color: rgb(240, 217, 217);
+}
+.menu button:hover:not(.active) a {
+  color: #e31837;
+}
+
+.menu button a {
+  color: white;
+  font-weight: 750;
+  text-decoration: none;
+}
+.menu li {
+  margin: 10 13px;
+}
+.maumethoi {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 10px;
+  background-color: rgb(246, 202, 8);
+}
+.overlay {
+  position: fixed;
+  border-radius: 0 0 0 100px;
+  top: 0;
+  left: 50%;
+  width: 50%;
+  height: 38px;
+  background-color: rgb(246, 202, 8);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.overlay a {
+  font-size: 14px;
+  font-weight: bold;
+  color: black;
+  text-decoration: none;
+  margin-right: 2px;
+  margin-left: 2px;
+  padding-right: 10px;
+}
+
+/* Làm cho chữ ĐĂNG KÝ / ĐĂNG NHẬP không bị cách quá xa nữa */
+.overlay .register,
+.overlay .login {
+  margin-left: -8px !important;
+  padding-right: 60px;
+  font-size: 13px;
+  transition: all 0.3s ease;
+}
+
+.overlay .register:hover,
+.overlay .login:hover {
+  text-decoration: underline !important;
+}
+.overlay .user-icon {
+  width: 24px; /* to hơn cờ một chút */
+  height: 24px;
+  margin-right: 12px; /* cách chữ một chút */
+  transform: translateY(-15px);
+}
+
+/* Tùy chỉnh lại dấu gạch / cho đẹp */
+.overlay > a:nth-of-type(3) {
+  /* chính là thẻ <a>/</a> */
+  margin: 0px;
+  padding: 2px;
+}
+
+/* ==================== SLIDER HIỆN ĐẠI + PROGRESS BAR ==================== */
+.slider-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 1425px; /* giới hạn chiều rộng tối đa */
+  height: 480px; /* chiều cao slider */
+  margin: 20px auto; /* cách trên dưới 30px, căn giữa ngang */
+  overflow: hidden;
+  padding: 0 100px;
+  margin-top: 4px;
+}
+
+.slider {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.5s ease-in-out;
+}
+
+.slide {
+  min-width: 100%;
+  height: 100%;
+  padding: 15px; /* tạo khoảng cách trong cho ảnh */
+  box-sizing: border-box;
+  transition: all 0.4s ease;
+}
+
+.slide img {
+  width: 100%;
+  height: 100%;
+  object-position: center;
+  border-radius: 15px; /* bo góc ảnh */
+  display: block;
+}
+
+/* Nút prev/next */
+.prev-btn,
+.next-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #f9b700 !important; /* vàng Jollibee */
+  color: white !important;
+  border: none;
+  width: 50px;
+  height: 50px;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 50%;
+  z-index: 10;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+}
+
+.prev-btn {
+  left: 20px;
+}
+.next-btn {
+  right: 20px;
+}
+
+.prev-btn:hover,
+.next-btn:hover {
+  background: rgba(255, 0, 0, 0.8);
+  transform: translateY(-50%) scale(1.12);
+}
+
+/* Các thanh progress riêng từng slide (ẩn) */
+.progress-bars {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 12px;
+  z-index: 11;
+}
+
+.progress-bars span {
+  width: 13px;
+  height: 13px;
+  background: rgba(241, 219, 219, 0.6);
+  border-radius: 50%;
+  border: 1px solid #5e5757;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.progress-bars span.active {
+  width: 31px !important; /* kéo dài ngang */
+  background: #e31837; /* đỏ Jollibee */
+  border-radius: 30px; /* dạng viên thuốc */
+  border: none !important;
+}
+
+/* Hover vào chấm bất kỳ: xám đậm hơn (không đỏ) */
+.progress-bars span:hover {
+  background: rgba(169, 164, 164, 0.8) !important;
+}
+
+/* Khi hover chấm đang active thì vẫn giữ đỏ nhưng sáng hơn tí */
+.progress-bars span.active:hover {
+  background: #ff1a3a !important;
+}
+
+@keyframes progress {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .slider-wrapper {
+    height: 360px;
+    border-radius: 14px;
+    margin: 15px auto;
+  }
+  .slide {
+    padding: 8px;
+  }
+  .slide img {
+    border-radius: 12px;
+  }
+  .prev-btn,
+  .next-btn {
+    width: 44px;
+    height: 44px;
+    font-size: 24px;
+  }
+  .prev-btn {
+    left: 10px;
+  }
+  .next-btn {
+    right: 10px;
+  }
+}
+
+.menu button.has-dropdown {
+  position: relative;
+}
+
+.mega-dropdown {
+  position: absolute;
+  top: 82%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255, 218, 225, 0.98); /* hồng nhạt Jollibee */
+  backdrop-filter: blur(10px);
+  border-radius: 0 0 30px 30px;
+  padding: 20px 10px;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  width: auto;
+  min-width: 1150px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: all 0.4s ease;
+  z-index: 999;
+  margin-left: 250px;
+  height: 145px;
+}
+
+.menu button.has-dropdown:hover .mega-dropdown {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: all;
+  transform: translateX(-50%) translateY(10px);
+}
+
+.dropdown-item {
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: -25px;
+  transform: translateY(-20px);
+  margin-left: -10px;
+}
+
+.dropdown-item img {
+  width: 102px;
+  height: 110px;
+  object-fit: contain;
+  margin-left: 20px;
+  margin-bottom: 12px;
+  transition: all 0.3s ease;
+}
+
+.dropdown-item:hover img {
+  transform: scale(1.3);
+}
+
+.dropdown-item:hover span {
+  color: #e31837 !important; /* <<< CHỮ ĐỎ KHI HOVER */
+  font-weight: 900;
+}
+
+.dropdown-item span {
+  display: block;
+  font-weight: 800;
+  font-size: 12px;
+  color: #000000;
+  letter-spacing: 0.5px;
+  margin-left: 20px;
+  margin-top: -18px;
+}
+
+/* Responsive - mobile ẩn dropdown */
+@media (max-width: 992px) {
+  .mega-dropdown {
+    display: none !important;
+  }
+}
