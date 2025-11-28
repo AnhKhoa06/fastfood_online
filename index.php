@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="icon" type="image/png" href="picture/logo.png">
         <title> FastFood Online </title>
-        <link rel="stylesheet" href="assets/css/style1.css">
+        <link rel="stylesheet" href="assets/css/style3.css">
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
     </head>
     <body>
@@ -70,9 +70,9 @@
                 <img type="img/png" src="assets/img/header/flag-en.png" style="height: 18px; width: 18px; margin-top: 10px;">
                 <a href="#" style="font-size:15px; margin-right: 100px;">EN</a>
                 <img src="assets/img/header/admin.png" alt="User" class="user-icon">
-                <a class="register" href="#">ĐĂNG KÝ</a>
+                <a class="register" href="login-resigter.html">ĐĂNG KÝ</a>
                 <a>/</a>
-                <a class="login" href="#">ĐĂNG NHẬP</a>
+                <a class="login" href="login-resigter.html">ĐĂNG NHẬP</a>
             </div>
         </div>
         <!-- Site banner slider (separate from navbar) -->
@@ -100,8 +100,30 @@
             <div class="progress-bars"></div>
         </div>
 
+        <!-- PHẦN GIAO HÀNG / ĐẾN LẤY -->
+        <div class="delivery-section">
+            <div class="delivery-tabs">
+                <button class="tab-btn active" data-type="delivery">
+                    GIAO HÀNG TẬN NƠI
+                </button>
+                <button class="tab-btn" data-type="pickup">
+                    ĐẶT ĐẾN LẤY
+                </button>
+            </div>
+
+            <div class="search-box">
+                <input type="text" id="address-input" placeholder="Nhập địa chỉ giao hàng">
+                <button class="search-btn">
+                    <svg viewBox="0 0 24 24" width="24" height="24" fill="white">
+                        <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
 
     </body>
 </html>
 <script src="assets/js/slider.js"></script>
 <script src="assets/js/header.js"></script>
+<script src="assets/js/index.js"></script>

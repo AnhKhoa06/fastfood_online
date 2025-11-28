@@ -8,6 +8,7 @@
 
 body {
   padding-top: 120px !important;
+  background: #edede2;
 }
 
 .navb {
@@ -341,7 +342,7 @@ body {
 }
 
 .dropdown-item:hover span {
-  color: #e31837 !important; /* <<< CHỮ ĐỎ KHI HOVER */
+  color: #fb0429 !important; /* <<< CHỮ ĐỎ KHI HOVER */
   font-weight: 900;
 }
 
@@ -355,9 +356,94 @@ body {
   margin-top: -18px;
 }
 
-/* Responsive - mobile ẩn dropdown */
-@media (max-width: 992px) {
-  .mega-dropdown {
-    display: none !important;
-  }
+/* ==================== GIAO HÀNG TẬN NƠI / ĐẾN LẤY - CHUẨN JOLLIBEE ==================== */
+.delivery-section {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.delivery-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.tab-btn {
+  padding: 12px 28px;
+  border: none;
+  border-radius: 50px;
+  font-weight: 800;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.35s ease;
+  min-width: 180px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.tab-btn:not(.active) {
+  background: #e6e5e5;
+  color: #666;
+}
+
+.tab-btn.active {
+  background: #e31837;
+  color: white;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(227, 24, 55, 0.35);
+}
+
+/* Hover cho nút không active */
+.tab-btn:not(.active):hover {
+  background: #e0e0e0;
+  transform: translateY(-2px);
+}
+
+/* Thanh tìm kiếm */
+.search-box {
+  position: relative;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+#address-input {
+  width: 100%;
+  padding: 18px 70px 18px 25px;
+
+  border-radius: 50px;
+  background: white;
+  font-size: 16px;
+  color: #000000;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.26);
+  outline: none;
+  cursor: text !important;
+  border: 2px solid transparent;
+}
+
+#address-input:focus {
+  border-color: #007bff !important; /* xanh dương chuẩn */
+  background: #f8fbff;
+}
+
+.search-btn {
+  position: absolute;
+  right: 8px;
+  top: 7.5px;
+  width: 42px;
+  height: 42px;
+  background: #e31837;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(227, 24, 55, 0.4);
+}
+
+.search-btn:hover {
+  background: #c0102d;
+  transform: scale(1.08);
 }

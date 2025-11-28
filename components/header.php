@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="icon" type="image/png" href="picture/logo.png">
         <title> FastFood Online </title>
-        <link rel="stylesheet" href="././assets/css/style1.css">
+        <link rel="stylesheet" href="././assets/css/style3.css">
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
     </head>
     <body>
@@ -70,9 +70,9 @@
                 <img type="img/png" src="././assets/img/header/flag-en.png" style="height: 18px; width: 18px; margin-top: 10px;">
                 <a href="#" style="font-size:15px; margin-right: 100px;">EN</a>
                 <img src="././assets/img/header/admin.png" alt="User" class="user-icon">
-                <a class="register" href="#">ĐĂNG KÝ</a>
+                <a class="register" href="././login-resigter.html">ĐĂNG KÝ</a>
                 <a>/</a>
-                <a class="login" href="#">ĐĂNG NHẬP</a>
+                <a class="login" href="././login-resigter.html">ĐĂNG NHẬP</a>
             </div>
         </div>
         <!-- Site banner slider (separate from navbar) -->
@@ -80,3 +80,5 @@
     </body>
 </html>
 <script src="././assets/js/header.js"></script>
+<script src="././assets/js/index.js"></script>
+
