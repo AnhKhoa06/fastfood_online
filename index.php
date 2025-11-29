@@ -3,14 +3,14 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="icon" type="image/png" href="picture/logo.png">
-        <title> FastFood Online </title>
+        <link rel="icon" type="image/png" href="assets/img/header/logo.jpg">
+        <title> Phở Anh Hai </title>
         <link rel="stylesheet" href="assets/css/style3.css">
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
     </head>
     <body>
         <div class="navb">
-            <img type="image/webp" src="assets/img/header/logo.webp" alt="">
+            <img type="image/webp" src="assets/img/header/logo.jpg" alt="">
             <ul class="menu">                            
                 <button class="active"><li><a href="#trang-chu">TRANG CHỦ</a></li></button>
                 <button><li><a href="#ve-anh-hai">VỀ ANH HAI</a></li></button>
@@ -70,7 +70,7 @@
                 <img type="img/png" src="assets/img/header/flag-en.png" style="height: 18px; width: 18px; margin-top: 10px;">
                 <a href="#" style="font-size:15px; margin-right: 100px;">EN</a>
                 <img src="assets/img/header/admin.png" alt="User" class="user-icon">
-                <a class="register" href="login-resigter.html">ĐĂNG KÝ</a>
+                <a class="register" href="login-resigter.html?mode=signup">ĐĂNG KÝ</a>
                 <a>/</a>
                 <a class="login" href="login-resigter.html">ĐĂNG NHẬP</a>
             </div>
@@ -94,14 +94,12 @@
             <button class="prev-btn">&#10094;</button>
             <button class="next-btn">&#10095;</button>
 
-       
-
             <!-- Các thanh progress riêng của từng slide (ẩn, chỉ để animation) -->
             <div class="progress-bars"></div>
         </div>
 
         <!-- PHẦN GIAO HÀNG / ĐẾN LẤY -->
-        <div class="delivery-section">
+        <class="delivery-section">
             <div class="delivery-tabs">
                 <button class="tab-btn active" data-type="delivery">
                     GIAO HÀNG TẬN NƠI
@@ -121,7 +119,57 @@
             </div>
         </div>
 
-
+        <div>    
+            <div class="widget-today-menu-wrapper">
+                <div class="today-menu-content">
+                    <div class="intro-wrapper">
+                        <div class="intro">
+                            <div class="logo">
+                                <img src="assets/img/header/logo.jpg" alt="">
+                            </div>
+                            <p class="title">Ăn Gì Hôm Nay</p>
+                            <p class="description">Thực đơn Jollibee đa dạng và phong phú, có rất nhiều sự lựa chọn cho bạn, gia đình và bạn bè.</p>
+                        </div>
+                    </div>
+                    <div class="main-menu-wrapper">
+                        <div class="quad-menu">
+                            <a href="/ga-gion-vui-ve.html" class="quad menu">
+                                <div class="top-img-wrapper"><img src="https://jollibee.com.vn/media/wysiwyg/today/ga_gion_vui_ve.png" alt="">
+                                </div>
+                                <div class="bottom-img-wrapper">
+                                    <img src="https://jollibee.com.vn/media/e17856b74b7a0e-titlegagionvuive.png" alt="">
+                                    <button class="btn btn-orange text-uppercase btn-order">Đặt hàng                                </button>
+                                </div>
+                            </a>
+                            <a href="/ga-sot-cay.html" class="quad menu">
+                                <div class="top-img-wrapper"><img src="https://jollibee.com.vn/media/wysiwyg/today/ga_sot_cay.png" alt="">
+                                </div>
+                                <div class="bottom-img-wrapper">
+                                    <img src="https://jollibee.com.vn/media/0a7c5c03bdcaaf-titlegasotcay.png" alt="">
+                                    <button class="btn btn-orange text-uppercase btn-order">Đặt hàng                                </button>
+                                </div>
+                            </a>
+                            <a href="/mi-y-sot-bo-bam.html" class="quad menu">
+                                <div class="top-img-wrapper"><img src="https://jollibee.com.vn/media/wysiwyg/today/my_y_sot_bo_bam.png" alt="">
+                                </div>
+                                <div class="bottom-img-wrapper">
+                                    <img src="https://jollibee.com.vn/media/870d84c56fb2b9-titlemiysotbobam.png" alt="">
+                                    <button class="btn btn-orange text-uppercase btn-order">Đặt hàng                                </button>
+                                </div>
+                            </a>
+                            <a href="/mon-trang-mieng.html" class="quad menu">
+                                <div class="top-img-wrapper"><img src="https://jollibee.com.vn/media/wysiwyg/today/mon_trang_mieng.png" alt="">
+                                </div>
+                                <div class="bottom-img-wrapper">
+                                    <img src="https://jollibee.com.vn/media/3c96f92fbe5bc3-montrangmieng01.png" alt="">
+                                    <button class="btn btn-orange text-uppercase btn-order">Đặt hàng                                </button>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </body>
 </html>
 <script src="assets/js/slider.js"></script>

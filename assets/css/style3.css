@@ -447,3 +447,222 @@ body {
   background: #c0102d;
   transform: scale(1.08);
 }
+
+/* ==================== TODAY / ĂN GÌ HÔM NAY ==================== */
+.widget-today-menu-wrapper {
+  max-width: 1425px;
+  margin: 20px auto 40px auto;
+  padding: 0 10px;
+}
+.today-menu-content {
+  display: flex;
+  gap: 18px;
+  align-items: stretch;
+}
+.intro-wrapper {
+  flex: 0 0 320px;
+  background: #e31837; /* đỏ Jollibee */
+  padding: 34px 24px;
+  color: #fff;
+  display: flex;
+}
+.intro {
+  text-align: left;
+}
+.intro .logo img {
+  width: 130px;
+  height: auto;
+  display: block;
+  margin: 0 0 15px 55px;
+}
+.intro .title {
+  font-size: 40px;
+  font-weight: 900;
+  line-height: 1.02;
+  margin: -10px 0 15px 0;
+}
+.intro .description {
+  font-size: 14px;
+  opacity: 0.95;
+  max-width: 260px;
+}
+.main-menu-wrapper {
+  flex: 1 1 auto;
+}
+.quad-menu {
+  display: flex;
+  gap: 5px;
+  align-items: stretch;
+}
+.quad.menu {
+  display: block;
+  background: transparent;
+  border-radius: 8px;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  flex: 1 1 0;
+  min-width: 200px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+}
+.quad.menu {
+  display: block;
+  background: transparent;
+  border-radius: 8px;
+  overflow: visible; /* allow overlay to escape */
+  text-decoration: none;
+  color: inherit;
+  flex: 1 1 0;
+  min-width: 257px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  position: relative; /* for absolute overlay */
+}
+.quad.menu .top-img-wrapper {
+  width: 100%;
+  height: 450px;
+  overflow: hidden;
+  background: #fff;
+}
+.quad.menu .top-img-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.quad.menu .bottom-img-wrapper {
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: 30px;
+  background: #e31837; /* overlay red */
+  border-radius: 20px 20px 0 0;
+  padding: 10px 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center; /* center the button */
+  color: #fff;
+  /* start hidden/shifted down so only label peeks out */
+  transform: translateY(28px);
+  opacity: 0.98;
+  z-index: 1;
+}
+.quad.menu .bottom-img-wrapper img {
+  position: absolute;
+  bottom: 8px;
+  height: 40px;
+  object-fit: contain;
+  transition: transform 0.28s ease, bottom 0.28s ease, opacity 0.28s ease;
+}
+.btn-order,
+.btn-order.btn {
+  background: #ffd400; /* vàng */
+  color: #0b0b0b;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 6px 16px rgba(227,24,55,0.16);
+}
+.btn-order {
+  position: relative; /* keep above the left title image */
+  z-index: 2;
+}
+.btn-order:hover {
+  transform: translateY(-2px);
+}
+
+/* make the order button hidden initially inside the shifted overlay */
+.bottom-img-wrapper .btn-order {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.28s ease, transform 0.28s ease;
+}
+
+/* Hover: pull overlay up, reveal button and lift title image */
+.quad.menu:hover .bottom-img-wrapper {
+  transform: translateY(0);
+  margin-bottom: -91px;
+  height: 90px;
+}
+.quad.menu:hover .bottom-img-wrapper .btn-order {
+  opacity: 1;
+  transform: translateY(0);
+}
+.quad.menu:hover .bottom-img-wrapper img {
+  bottom: -20px;
+  transform: translateY(-65px);
+}
+
+/* hover/transition effects for today menu cards */
+.quad.menu {
+  transition: transform 0.28s ease, box-shadow 0.28s ease;
+}
+.quad.menu .top-img-wrapper img {
+  transition: transform 0.45s cubic-bezier(.22,.9,.36,1);
+}
+.quad.menu .bottom-img-wrapper {
+  transition: transform 0.28s ease, box-shadow 0.28s ease, background 0.28s ease;
+}
+.quad.menu:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 14px 42px rgba(0,0,0,0.22);
+}
+.quad.menu:hover .top-img-wrapper img {
+  transform: scale(1.08) translateZ(0);
+}
+.quad.menu:hover .bottom-img-wrapper {
+  transform: translateY(-60px);
+  background: #c5112b;
+  box-shadow: 0 18px 44px rgba(0,0,0,0.26);
+}
+.quad.menu:hover .btn-order {
+  margin-bottom: -50px;
+  background: #ffcf3d;
+}
+
+
+/* Mobile / narrow screens: allow horizontal scroll */
+@media (max-width: 992px) {
+  .today-menu-content {
+    flex-direction: row;
+    align-items: stretch;
+  }
+  .intro-wrapper {
+    flex: 0 0 260px;
+    padding: 20px;
+  }
+  .quad-menu {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    -webkit-overflow-scrolling: touch;
+  }
+  .quad.menu {
+    min-width: 220px;
+    flex: 0 0 220px;
+  }
+}
+
+@media (max-width: 600px) {
+  .today-menu-content {
+    flex-direction: column;
+    gap: 12px;
+  }
+  .intro-wrapper {
+    flex: none;
+    width: 100%;
+    border-radius: 8px;
+    padding: 18px;
+  }
+  .quad-menu {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    gap: 12px;
+  }
+  .quad.menu {
+    min-width: 220px;
+    flex: 0 0 220px;
+  }
+}
+

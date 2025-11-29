@@ -169,6 +169,14 @@
       loginBtn.addEventListener("click", () => {
         container.classList.remove("active");
       });
+
+      // Kiểm tra URL parameter mode=signup
+      window.addEventListener("load", () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get("mode") === "signup") {
+          container.classList.add("active");
+        }
+      });
     </script>
   </body>
 </html>
