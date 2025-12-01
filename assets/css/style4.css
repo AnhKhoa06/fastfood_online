@@ -450,19 +450,19 @@ body {
 
 /* ==================== TODAY / ĂN GÌ HÔM NAY ==================== */
 .widget-today-menu-wrapper {
-  max-width: 1425px;
+  max-width: 1430px;
   margin: 20px auto 40px auto;
   padding: 0 10px;
 }
 .today-menu-content {
   display: flex;
-  gap: 18px;
+  gap: 13px;
   align-items: stretch;
 }
 .intro-wrapper {
-  flex: 0 0 320px;
+  flex: 0 0 336px;
   background: #e31837; /* đỏ Jollibee */
-  padding: 34px 24px;
+  padding: 34px 32px;
   color: #fff;
   display: flex;
 }
@@ -473,18 +473,20 @@ body {
   width: 130px;
   height: auto;
   display: block;
-  margin: 0 0 15px 55px;
+  margin: 0 0 15px 73.5px;
 }
 .intro .title {
-  font-size: 40px;
-  font-weight: 900;
+  font-size: 38px;
+  font-weight: 850;
   line-height: 1.02;
-  margin: -10px 0 15px 0;
+  margin: 0px 0 23px 0;
+  text-align: center;
 }
 .intro .description {
   font-size: 14px;
   opacity: 0.95;
-  max-width: 260px;
+  max-width: 270px;
+  text-align: center;
 }
 .main-menu-wrapper {
   flex: 1 1 auto;
@@ -524,8 +526,8 @@ body {
   background: #fff;
 }
 .quad.menu .top-img-wrapper img {
-  width: 100%;
-  height: 100%;
+  width: 99%;
+  height: 95%;
   object-fit: cover;
   display: block;
 }
@@ -533,10 +535,10 @@ body {
   position: absolute;
   left: 12px;
   right: 12px;
-  bottom: 30px;
-  background: #e31837; /* overlay red */
+  bottom: 28px;
+  background: #d6112e; /* overlay red */
   border-radius: 20px 20px 0 0;
-  padding: 10px 15px;
+  padding: 18px 15px;
   display: flex;
   align-items: center;
   justify-content: center; /* center the button */
@@ -545,6 +547,7 @@ body {
   transform: translateY(28px);
   opacity: 0.98;
   z-index: 1;
+  transition: transform 0.5s ease-in-out;
 }
 .quad.menu .bottom-img-wrapper img {
   position: absolute;
@@ -568,9 +571,6 @@ body {
   position: relative; /* keep above the left title image */
   z-index: 2;
 }
-.btn-order:hover {
-  transform: translateY(-2px);
-}
 
 /* make the order button hidden initially inside the shifted overlay */
 .bottom-img-wrapper .btn-order {
@@ -584,6 +584,7 @@ body {
   transform: translateY(0);
   margin-bottom: -91px;
   height: 90px;
+  transition: all 0.4s ease-in-out;
 }
 .quad.menu:hover .bottom-img-wrapper .btn-order {
   opacity: 1;
@@ -602,17 +603,16 @@ body {
   transition: transform 0.45s cubic-bezier(0.22, 0.9, 0.36, 1);
 }
 .quad.menu .bottom-img-wrapper {
-  transition: transform 0.28s ease, box-shadow 0.28s ease, background 0.28s ease;
+  transition: all 2s ease-in-out;
 }
 .quad.menu:hover {
-  transform: translateY(-8px);
   box-shadow: 0 14px 42px rgba(0, 0, 0, 0.22);
 }
 .quad.menu:hover .top-img-wrapper img {
-  transform: scale(1.08) translateZ(0);
+  transform: scale(1.09) translateZ(0);
 }
 .quad.menu:hover .bottom-img-wrapper {
-  transform: translateY(-60px);
+  transform: translateY(-63px);
   background: #c5112b;
   box-shadow: 0 18px 44px rgba(0, 0, 0, 0.26);
 }
@@ -621,46 +621,109 @@ body {
   background: #ffcf3d;
 }
 
-/* Mobile / narrow screens: allow horizontal scroll */
-@media (max-width: 992px) {
-  .today-menu-content {
-    flex-direction: row;
-    align-items: stretch;
-  }
-  .intro-wrapper {
-    flex: 0 0 260px;
-    padding: 20px;
-  }
-  .quad-menu {
-    overflow-x: auto;
-    flex-wrap: nowrap;
-    -webkit-overflow-scrolling: touch;
-  }
-  .quad.menu {
-    min-width: 220px;
-    flex: 0 0 220px;
-  }
+/* ==================== PHẦN DỊCH VỤ - ĐẸP CHUẨN JOLLIBEE ==================== */
+.services-section {
+  background: #fff8f0
+    url("https://img4.thuthuatphanmem.vn/uploads/2020/06/22/hinh-nen-powerpoint-do-an-cuc-dep-2_093018191.jpg")
+    repeat center;
+  background-size: cover;
+  padding: 100px 20px 160px;
+  text-align: center;
+  position: relative;
 }
 
-@media (max-width: 600px) {
-  .today-menu-content {
-    flex-direction: column;
-    gap: 12px;
-  }
-  .intro-wrapper {
-    flex: none;
-    width: 100%;
-    border-radius: 8px;
-    padding: 18px;
-  }
-  .quad-menu {
-    display: flex;
-    flex-direction: row;
-    overflow-x: auto;
-    gap: 12px;
-  }
-  .quad.menu {
-    min-width: 220px;
-    flex: 0 0 220px;
-  }
+.services-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0);
+  backdrop-filter: blur(4px);
+  z-index: 0;
+}
+
+/* Đưa nội dung lên trên lớp mờ */
+.services-container {
+  position: relative;
+  z-index: 1;
+}
+
+.services-container {
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+.services-title {
+  font-size: 38px;
+  font-weight: 900;
+  color: #e31837;
+  margin-bottom: 10px;
+  letter-spacing: 1px;
+}
+
+.services-subtitle {
+  font-size: 18px;
+  color: #444;
+  margin-bottom: 50px;
+  font-weight: 500;
+}
+
+.services-grid {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.service-item {
+  width: 220px;
+  transition: transform 0.3s ease;
+  transform: translateY(40px);
+}
+
+.service-icon {
+  width: 220px;
+  height: 220px;
+  margin: 0 auto 20px;
+
+  overflow: hidden;
+
+  padding: -40px;
+}
+
+.service-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.service-item h3 {
+  font-size: 17px;
+  font-weight: 800;
+  color: #000000;
+  margin-bottom: 15px;
+  letter-spacing: 0.5px;
+  margin-top: 70px;
+}
+
+.btn-service {
+  display: inline-block;
+  background: #e31837;
+  color: white;
+  font-weight: 800;
+  font-size: 13px;
+  padding: 10px 37px;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(227, 24, 55, 0.3);
+  margin-top: 10px;
+}
+
+.btn-service:hover {
+  background: #c0112d;
+  transform: scale(1.09) translateZ(0);
+  box-shadow: 0 8px 25px rgba(227, 24, 55, 0.4);
 }

@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="icon" type="image/png" href="assets/img/header/logo.jpg">
         <title> Phở Anh Hai </title>
-        <link rel="stylesheet" href="assets/css/style3.css">
+        <link rel="stylesheet" href="assets/css/style4.css">
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
     </head>
     <body>
@@ -127,8 +127,9 @@
                             <div class="logo">
                                 <img src="assets/img/header/logo.jpg" alt="">
                             </div>
-                            <p class="title">Ăn Gì Hôm Nay</p>
-                            <p class="description">Thực đơn Jollibee đa dạng và phong phú, có rất nhiều sự lựa chọn cho bạn, gia đình và bạn bè.</p>
+                            <p class="title">ĂN GÌ</p>
+                            <p class="title">HÔM NAY</p>
+                            <p class="description">Thực đơn của Phở Anh Hai đa dạng và phong phú, có rất nhiều sự lựa chọn cho bạn, gia đình và bạn bè.</p>
                         </div>
                     </div>
                     <div class="main-menu-wrapper">
@@ -170,6 +171,54 @@
                 </div>
             </div>
         </div>
+
+        <!-- ==================== PHẦN DỊCH VỤ - CHUẨN JOLLIBEE ==================== -->
+        <section class="services-section">
+            <div class="services-container">
+                <div class="services-header">
+                    <h2 class="services-title">DỊCH VỤ</h2>
+                    <p class="services-subtitle">Tận hưởng những khoảnh khắc trọn vẹn cùng Jollibee</p>
+                </div>
+
+                <div class="services-grid">
+                    <!-- Dịch vụ 1 -->
+                    <div class="service-item">
+                        <div class="service-icon">
+                            <img src="https://jollibee.com.vn/media/3478848e-3b8f-45f8-bc64-32e112922a8b.png" alt="Đặt hàng online">
+                        </div>
+                        <h3>LẤY TẠI CỬA HÀNG</h3>
+                        <a href="#" class="btn-service">XEM THÊM</a>
+                    </div>
+
+                    <!-- Dịch vụ 2 -->
+                    <div class="service-item">
+                        <div class="service-icon">
+                            <img src="https://jollibee.com.vn/media/2_1.png" alt="Tiệc sinh nhật">
+                        </div>
+                        <h3>ĐẶT TIỆC SINH NHẬT</h3>
+                        <a href="#" class="btn-service">XEM THÊM</a>
+                    </div>
+
+                    <!-- Dịch vụ 3 -->
+                    <div class="service-item">
+                        <div class="service-icon">
+                            <img src="https://jollibee.com.vn/media/club.png" alt="Jollibee Kids Club">
+                        </div>
+                        <h3>JOLLIBEE KIDS CLUB</h3>
+                        <a href="#" class="btn-service">XEM THÊM</a>
+                    </div>
+
+                    <!-- Dịch vụ 4 -->
+                    <div class="service-item">
+                        <div class="service-icon">
+                            <img src="https://jollibee.com.vn/media/4_1.png" alt="Đơn hàng lớn">
+                        </div>
+                        <h3>ĐƠN HÀNG LỚN</h3>
+                        <a href="#" class="btn-service">XEM THÊM</a>
+                    </div>
+                </div>
+            </div>
+        </section>
 
         
     </body>
