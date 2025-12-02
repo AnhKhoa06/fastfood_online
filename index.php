@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="icon" type="image/png" href="assets/img/header/logo.jpg">
         <title> Phở Anh Hai </title>
-        <link rel="stylesheet" href="assets/css/style5.css">
+        <link rel="stylesheet" href="assets/css/style.css">
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
     </head>
     <body>
