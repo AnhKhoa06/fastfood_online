@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="icon" type="image/png" href="assets/img/header/logo.jpg">
         <title> Phở Anh Hai </title>
-        <link rel="stylesheet" href="assets/css/style4.css">
+        <link rel="stylesheet" href="assets/css/style5.css">
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
     </head>
     <body>
@@ -219,6 +219,36 @@
                 </div>
             </div>
         </section>
+
+        <!-- ==================== JOLLIBEE, XIN CHÀO – CHỈ LÀM NỀN CHO RIÊNG PHẦN NÀY ==================== -->
+        <div class="welcome-hero-section">
+            <div class="welcome-hero-content">
+                <h1>JOLLIBEE, XIN CHÀO</h1>
+                <p>
+                    Chúng tôi là Jollibee Việt Nam với hơn 200 cửa hàng trên khắp cả nước, chúng tôi mong muốn đem đến niềm vui ẩm thực cho mọi gia đình Việt bằng những món ăn có chất lượng tốt, hương vị tuyệt hảo, dịch vụ chu đáo với một mức giá hợp lý. Hãy đến và thưởng thức nhé!
+                </p>
+                <a href="#" class="btn-dat-hang">ĐẶT HÀNG</a>
+            </div>
+        </div>
+
+        <!-- TÌM CỬA HÀNG (nằm ngoài ảnh nền, không bị ảnh hưởng) -->
+        <div class="store-finder">
+            <h2>TÌM CỬA HÀNG</h2>
+            <div class="store-form">
+                <select class="select-city">
+                    <option value="" disabled selected>Chọn tỉnh thành</option>
+                    <option>TP. Hồ Chí Minh</option>
+                    <option>Hà Nội</option>
+                    <option>Đà Nẵng</option>
+                    <option>Bình Dương</option>
+                    <option>Cần Thơ</option>
+                </select>
+                <select class="select-district">
+                    <option value="" disabled selected>Chọn quận huyện</option>
+                </select>
+                <button class="btn-search">TÌM KIẾM</button>
+            </div>
+        </div>
 
         
     </body>
