@@ -223,9 +223,9 @@
         <!-- ==================== JOLLIBEE, XIN CHÀO – CHỈ LÀM NỀN CHO RIÊNG PHẦN NÀY ==================== -->
         <div class="welcome-hero-section">
             <div class="welcome-hero-content">
-                <h1>JOLLIBEE, XIN CHÀO</h1>
+                <h1>PHỞ ANH HAI, XIN CHÀO</h1>
                 <p>
-                    Chúng tôi là Jollibee Việt Nam với hơn 200 cửa hàng trên khắp cả nước, chúng tôi mong muốn đem đến niềm vui ẩm thực cho mọi gia đình Việt bằng những món ăn có chất lượng tốt, hương vị tuyệt hảo, dịch vụ chu đáo với một mức giá hợp lý. Hãy đến và thưởng thức nhé!
+                    Chúng tôi là Phở Anh Hai Việt Nam với hơn 200 cửa hàng trên khắp cả nước, chúng tôi mong muốn đem đến niềm vui ẩm thực cho mọi gia đình Việt bằng những món ăn có chất lượng tốt, hương vị tuyệt hảo, dịch vụ chu đáo với một mức giá hợp lý. Hãy đến và thưởng thức nhé!
                 </p>
                 <a href="#" class="btn-dat-hang">ĐẶT HÀNG</a>
             </div>

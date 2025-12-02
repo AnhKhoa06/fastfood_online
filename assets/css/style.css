@@ -787,7 +787,7 @@ body {
 /* TÌM CỬA HÀNG – ĐÃ NẰM TRONG ẢNH NỀN */
 .store-finder {
   max-width: auto;
-  margin: 40px auto; /* Thay đổi: Xóa margin âm, dùng margin dương để đẩy xuống */
+  margin: 0 auto 40px auto; /* Thay đổi: Xóa margin âm, dùng margin dương để đẩy xuống */
   background: #ff6a00;
   padding: 30px 40px;
   text-align: center;
