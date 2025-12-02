@@ -840,136 +840,152 @@ body {
 }
 
 /* FOOTER */
-
-        /* Thiết lập cơ bản */
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: Arial, sans-serif; }
-
-        /* Style cho Footer */
-        .footer {
-            background-color: #E31837; /* Màu đỏ Jollibee */
-            color: white;
-            padding: 40px 0;
-            font-size: 14px;
-            line-height: 1.6;
-        }
-
-        .container {
-            width: 1140px;
-            max-width: 100%;
-            margin: 0 auto;
-            padding: 0 15px;
-        }
-
-        /* Flexbox chia cột */
-        .footer-row {
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-        }
-
-        .footer-col {
-            width: 32%; /* Chia đều 3 cột, mỗi cột khoảng 32% */
-            margin-bottom: 20px;
-        }
-
-        /* CỘT 1: LOGO & INFO */
-        .footer-logo {
-            width: 80px;
-            background: white;
-            padding: 5px;
-            border-radius: 50%;
-            margin-bottom: 15px;
-        }
-        
-        .footer-col h4 {
-            margin-bottom: 15px;
-            font-weight: bold;
-            text-transform: uppercase;
-            font-size: 16px;
-        }
-
-        /* CỘT 2: HOTLINE & LINKS */
-        .center-col { text-align: center; } /* Căn giữa nội dung cột 2 */
-
-        .hotline-box { margin-bottom: 20px; }
-
-        .phone-number {
-            font-size: 36px; /* Số to */
-            font-weight: 800;
-            margin-bottom: 5px;
-        }
-
-        .delivery-badge {
-            background-color: #FFC526; /* Màu vàng */
-            color: #E31837;
-            font-weight: 900;
-            display: inline-block;
-            padding: 8px 25px;
-            border-radius: 50px; /* Bo tròn viên thuốc */
-            text-transform: uppercase;
-        }
-
-        .footer-links { list-style: none; text-align: left; padding-left: 40px; }
-        .footer-links li { margin-bottom: 10px; }
-        .footer-links a { color: white; text-decoration: none; transition: 0.3s; }
-        .footer-links a:hover { text-decoration: underline; }
-
-        /* CỘT 3: FACEBOOK & APP */
-        /* Nút Facebook giống thật */
-        .fb-btn {
-            display: flex;
-             align-items: center;
-             color: white;
-             text-decoration: none;
-             font-weight: bold;
-             font-size: 15px;
-            }
-            
-            .social-box {
-                margin-bottom: 25px; /* Bạn chỉnh số này to nhỏ tùy ý */
-            }
-        
-        .fb-icon {
-            background-color: #FFC526;
-            color: #E31837;
-            width: 28px;
-            height: 28px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-radius: 4px;
-            margin-right: 10px;
-            font-family: serif; /* Font chữ f có chân */
-            font-weight: bold;
-            font-size: 18px;
-        }
-
-        .bct-logo { margin-bottom: 25px }
-        
-        .app-buttons img {
-            height: 35px;
-            margin-right: 5px;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-
-        .icon-box {
-           width: 30px;
-            height: 30px;
-           background-color: #FFC526; /* Màu vàng Jollibee */
-           color: #E31837; /* Chữ f màu đỏ */
-           display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 4px; /* Bo góc nhẹ */
-            margin-right: 12px;
-           font-size: 18px; /* Kích thước chữ f */
+/* Thiết lập cơ bản */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-family: Arial, sans-serif;
 }
 
-        /* Responsive cho Mobile */
-        @media (max-width: 768px) {
-            .footer-col { width: 100%; text-align: center; }
-            .footer-links { text-align: center; padding-left: 0; }
-        }
-    
+/* Style cho Footer */
+.footer {
+  background-color: #e31837; /* Màu đỏ Jollibee */
+  color: white;
+  padding: 40px 0;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.container {
+  width: 1140px;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+/* Flexbox chia cột */
+.footer-row {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.footer-col {
+  width: 32%; /* Chia đều 3 cột, mỗi cột khoảng 32% */
+  margin-bottom: 20px;
+}
+
+/* CỘT 1: LOGO & INFO */
+.footer-logo {
+  width: 80px;
+  background: white;
+  padding: 5px;
+  border-radius: 50%;
+  margin-bottom: 15px;
+}
+
+.footer-col h4 {
+  margin-bottom: 15px;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 16px;
+}
+
+/* CỘT 2: HOTLINE & LINKS */
+.center-col {
+  text-align: center;
+} /* Căn giữa nội dung cột 2 */
+
+.hotline-box {
+  margin-bottom: 20px;
+}
+
+.phone-number {
+  font-size: 36px; /* Số to */
+  font-weight: 800;
+  margin-bottom: 5px;
+}
+
+.delivery-badge {
+  background-color: #ffc526; /* Màu vàng */
+  color: #e31837;
+  font-weight: 900;
+  display: inline-block;
+  padding: 8px 25px;
+  border-radius: 50px; /* Bo tròn viên thuốc */
+  text-transform: uppercase;
+}
+
+.footer-links {
+  list-style: none;
+  text-align: left;
+  padding-left: 40px;
+}
+.footer-links li {
+  margin-bottom: 10px;
+}
+.footer-links a {
+  color: white;
+  text-decoration: none;
+  transition: 0.3s;
+}
+.footer-links a:hover {
+  text-decoration: underline;
+}
+
+/* CỘT 3: FACEBOOK & APP */
+/* Nút Facebook giống thật */
+.fb-btn {
+  display: flex;
+  align-items: center;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.social-box {
+  margin-bottom: 25px; /* Bạn chỉnh số này to nhỏ tùy ý */
+}
+
+.fb-icon {
+  background-color: #ffc526;
+  color: #e31837;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+  margin-right: 10px;
+  font-family: serif; /* Font chữ f có chân */
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.bct-logo {
+  margin-bottom: 25px;
+}
+
+.app-buttons img {
+  height: 35px;
+  margin-right: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.icon-box {
+  width: 30px;
+  height: 30px;
+  background-color: #ffc526; /* Màu vàng Jollibee */
+  color: #e31837; /* Chữ f màu đỏ */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px; /* Bo góc nhẹ */
+  margin-right: 12px;
+  font-size: 18px; /* Kích thước chữ f */
+}
