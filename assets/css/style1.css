@@ -989,3 +989,55 @@ body {
   margin-right: 12px;
   font-size: 18px; /* Kích thước chữ f */
 }
+
+.user-menu {
+  cursor: pointer;
+}
+
+#dropdown-arrow {
+  transition: transform 0.3s ease;
+  font-size: 13px;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: white;
+  min-width: 150px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+  padding: 5px 0;
+  margin-top: 8px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+  z-index: 9999;
+  margin-right: 73px;
+}
+
+.dropdown-menu a {
+  display: block;
+  padding: 10px 20px;
+  color: #333;
+  text-decoration: none;
+  font-size: 12px;
+}
+
+.dropdown-menu a:hover {
+  background: #f8f8f8;
+  color: #e31837;
+}
+
+/* Khi mở dropdown */
+.user-menu.open #user-dropdown.open,
+.user-menu.open .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.user-menu.open #dropdown-arrow {
+  transform: rotate(180deg);
+}
