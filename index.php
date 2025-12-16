@@ -85,7 +85,7 @@ require_once 'admin/config/db.php'
                         <span style="color: black; font-weight: bold; font-size: 14px; margin-left: -4px; margin-right: 20px;">
                             Xin chào, <?php echo $username; ?>
                         </span>
-                        <i class="fas fa-caret-down" id="dropdown-arrow" style="margin-left: 57px; color: #e31837;"></i>
+                        <i class="fas fa-caret-down" id="dropdown-arrow" style="margin-left: 47px; color: #e31837;"></i>
 
                         <div class="dropdown-menu" id="user-dropdown">
                             <a href="profile.php">Tài khoản của tôi</a>
@@ -294,7 +294,44 @@ require_once 'admin/config/db.php'
         </div>
 
 
-        <!--thằng bao dả làm phần tin tức ở chỗ này nhé -->
+        <!----------Tin tức----------->
+
+        <div class="container">
+            <h1>TIN TỨC</h1>
+            <div class="news-grid">
+                <div class="news-item">
+                    <img src="https://jollibee.com.vn/media/wysiwyg/TT1.jpg" alt="Jollibee 200 cửa hàng">
+                    <div class="news-content">
+                        <div class="news-title">JOLLIBEE ĐẠT MỐC 200 CỬA HÀNG TẠI THỊ TRƯỜNG VIỆT NAM</div>
+                        <div class="news-desc">Sự kiện khai trương cửa hàng thứ 200 là cột mốc quan trọng trong kế hoạch mở rộng kinh...</div>
+                    </div>
+                </div>
+                <div class="news-item">
+                    <img src="https://jollibee.com.vn/media/wysiwyg/WEB_200STORE-02.jpg" alt="Hợp tác bền vững">
+                    <div class="news-content">
+                        <div class="news-title">HỢP TÁC BỀN VỮNG GIÚP JOLLIBEE PHÁT TRIỂN TẠI VIỆT NAM SAU HAI THẬP KỶ</div>
+                        <div class="news-desc">Việc có chung mục tiêu và mối quan hệ hợp tác chặt chẽ với các đối tác giúp Jollibee Việt...</div>
+                    </div>
+                </div>
+                <div class="news-item">
+                    <img src="https://jollibee.com.vn/media/wysiwyg/thumbnail.jpg" alt="Cửa hàng thứ 191">
+                    <div class="news-content">
+                        <div class="news-title">JOLLIBEE VIỆT NAM KHAI TRƯƠNG CỬA HÀNG THỨ 191</div>
+                        <div class="news-desc">Vào ngày 17/05/2024, tại tuyến phố Mê Linh sầm uất của phường Liên Bảo, thành...</div>
+                    </div>
+                </div>
+                <div class="news-item">
+                    <img src="https://jollibee.com.vn/media/wysiwyg/Capture_1.PNG" alt="Cửa hàng thứ 150">
+                    <div class="news-content">
+                        <div class="news-title">JOLLIBEE VIỆT NAM KHAI TRƯƠNG CỬA HÀNG THỨ 150</div>
+                        <div class="news-desc">Jollibee Việt Nam đã đưa vào vận hành nhà máy mới với chứng nhận ISO 22000:2018 về...</div>
+                    </div>
+                </div>
+            </div>
+            <div class="view-more">
+                <button class="view-more-btn">Xem thêm</button>
+            </div>
+        </div>
 
 
 

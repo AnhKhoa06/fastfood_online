@@ -1041,3 +1041,111 @@ body {
 .user-menu.open #dropdown-arrow {
   transform: rotate(180deg);
 }
+
+
+
+
+/* CSS Tin tức*/
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 40px 20px;
+    background-color: #ffffff;
+    color: #333;
+}
+
+.container {
+    max-width: 1900px; /* Tăng lên một chút để 4 card thoải mái hơn */
+    margin: 0 auto;
+}
+
+h1 {
+    text-align: center;
+    color: #e62434;
+    font-size: 42px;
+    font-weight: bold;
+    margin-bottom: 50px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.news-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Luôn 4 cột */
+    gap: 35px; /* Giảm gap một chút để vừa hàng */
+}
+
+
+.news-item {
+    text-align: center;
+    background-color: #fff;
+    border-radius: 10px; /* Bo góc mạnh hơn giống hình bạn gửi */
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.news-item:hover {
+    transform: scale(1.02) translateZ(0);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+.news-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 10px 10px 0 0;
+}
+
+.news-content {
+    padding: 20px 15px;
+}
+
+.news-title {
+    font-size: 17px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 12px;
+    line-height: 1.4;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.news-desc {
+    font-size: 14px;
+    color: #666666;
+    line-height: 1.6;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.view-more {
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.view-more-btn {
+    background-color: #e62434;
+    color: #ffffff;
+    padding: 15px 60px;
+    font-size: 18px;
+    font-weight: bold;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
+}
+
+.view-more-btn:hover {
+    background-color: #c81c2a;
+}
+
+
+
