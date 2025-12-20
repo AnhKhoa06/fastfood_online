@@ -175,40 +175,35 @@ require_once 'admin/config/db.php'
                             <p class="description">Thực đơn của Phở Anh Hai đa dạng và phong phú, có rất nhiều sự lựa chọn cho bạn, gia đình và bạn bè.</p>
                         </div>
                     </div>
-                    <div class="main-menu-wrapper">
-                        <div class="quad-menu">
-                            <a href="/ga-gion-vui-ve.html" class="quad menu">
-                                <div class="top-img-wrapper"><img src="https://jollibee.com.vn/media/wysiwyg/today/ga_gion_vui_ve.png" alt="">
-                                </div>
-                                <div class="bottom-img-wrapper">
-                                    <img src="https://jollibee.com.vn/media/e17856b74b7a0e-titlegagionvuive.png" alt="">
-                                    <button class="btn btn-orange text-uppercase btn-order">Đặt hàng                                </button>
-                                </div>
-                            </a>
-                            <a href="/ga-sot-cay.html" class="quad menu">
-                                <div class="top-img-wrapper"><img src="https://jollibee.com.vn/media/wysiwyg/today/ga_sot_cay.png" alt="">
-                                </div>
-                                <div class="bottom-img-wrapper">
-                                    <img src="https://jollibee.com.vn/media/0a7c5c03bdcaaf-titlegasotcay.png" alt="">
-                                    <button class="btn btn-orange text-uppercase btn-order">Đặt hàng                                </button>
-                                </div>
-                            </a>
-                            <a href="/mi-y-sot-bo-bam.html" class="quad menu">
-                                <div class="top-img-wrapper"><img src="https://jollibee.com.vn/media/wysiwyg/today/my_y_sot_bo_bam.png" alt="">
-                                </div>
-                                <div class="bottom-img-wrapper">
-                                    <img src="https://jollibee.com.vn/media/870d84c56fb2b9-titlemiysotbobam.png" alt="">
-                                    <button class="btn btn-orange text-uppercase btn-order">Đặt hàng                                </button>
-                                </div>
-                            </a>
-                            <a href="/mon-trang-mieng.html" class="quad menu">
-                                <div class="top-img-wrapper"><img src="https://jollibee.com.vn/media/wysiwyg/today/mon_trang_mieng.png" alt="">
-                                </div>
-                                <div class="bottom-img-wrapper">
-                                    <img src="https://jollibee.com.vn/media/3c96f92fbe5bc3-montrangmieng01.png" alt="">
-                                    <button class="btn btn-orange text-uppercase btn-order">Đặt hàng                                </button>
-                                </div>
-                            </a>
+                        <div class="main-menu-wrapper">
+                            <div class="quad-menu">
+                                <?php
+                                // Lấy tất cả danh mục từ database, sắp xếp theo ID (hoặc bạn có thể thêm cột sort_order sau)
+                                $sql = "SELECT * FROM categories ORDER BY category_id ASC";
+                                $query = mysqli_query($connect, $sql);
+
+                                while ($row = mysqli_fetch_assoc($query)) {
+                                    // Đường dẫn ảnh đầy đủ (thay đổi nếu thư mục img1 không public trực tiếp)
+                                    $top_img = 'admin/img1/' . htmlspecialchars($row['image']);
+                                    $bottom_img = 'admin/img1/' . htmlspecialchars($row['child_image']);
+
+                                    // Bạn cần quyết định link dẫn đến đâu khi click
+                                    // Ví dụ tạm: dẫn đến trang danh mục chi tiết, hoặc trang sản phẩm theo danh mục
+                                    // Ở đây mình để ví dụ: /danh-muc.php?id=ID
+                                    $link = '/danh-muc.php?id=' . $row['category_id']; 
+                                    // Hoặc nếu bạn có slug, thì dùng slug tốt hơn
+                                ?>
+                                    <a href="<?php echo $link; ?>" class="quad menu">
+                                        <div class="top-img-wrapper">
+                                            <img src="<?php echo $top_img; ?>" alt="Danh mục">
+                                        </div>
+                                        <div class="bottom-img-wrapper">
+                                            <img src="<?php echo $bottom_img; ?>" alt="Danh mục">
+                                            <button class="btn btn-orange text-uppercase btn-order">Đặt hàng</button>
+                                        </div>
+                                    </a>
+                                <?php } ?>
+                            </div>
                         </div>
                     </div>
                 </div>

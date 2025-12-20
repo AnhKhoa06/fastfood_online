@@ -17,8 +17,8 @@ if (!isset($_SESSION['admin'])) {
     <link rel="icon" type="image/png" href="../img/logofpt7.png">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link rel="stylesheet" href="admin8.css">
-    <title>Smart Phone | My Admin</title>
+    <link rel="stylesheet" href="assets/style.css">
+    <title>Phở_Anh_Hai | My Admin</title>
 </head>
 <body>
     <!-- Sidebar bên trái -->
