@@ -1,0 +1,411 @@
+/* ==================== PROFILE - TÀI KHOẢN CỦA TÔI - CHUẨN 99% ẢNH MẪU ==================== */
+body {
+  background: #f8f8f8;
+  font-family: "Montserrat", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.profile-container {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 20px;
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.profile-sidebar {
+  flex: 0 0 280px;
+  background: #fffbe6;
+  border-radius: 10px;
+  padding: 30px 25px;
+  box-shadow: 0 8px 25px rgba(144, 142, 142, 0.08);
+  margin-top: -14px;
+  margin-bottom: auto;
+}
+
+.profile-sidebar h2 {
+  font-size: 20px;
+  font-weight: 900;
+  color: #e31837;
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+.sidebar-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar-menu li {
+  margin-bottom: 5px;
+}
+
+.sidebar-menu a {
+  display: block;
+  padding: 12px 20px;
+  color: #333;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.sidebar-menu a:hover,
+.sidebar-menu li.active a {
+  background: #e31837;
+  color: white;
+}
+
+.profile-main {
+  flex: 1;
+  min-width: 300px;
+}
+
+.profile-main .title-view {
+  font-size: 24px;
+  font-weight: 900;
+  color: #e31837;
+  margin-bottom: 12px;
+  margin-left: -283px;
+}
+
+.profile-main .title-edit {
+  font-size: 24px;
+  font-weight: 900;
+  color: #e31837;
+  margin-bottom: 12px;
+  margin-left: -188px;
+}
+
+.profile-main p {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 30px;
+  line-height: 1.6;
+}
+
+.info-box {
+  background: white;
+  border-radius: 9px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.info-header {
+  background: #ffd400;
+  color: black;
+  font-size: 20px;
+  font-weight: 900;
+  padding: 18px 30px;
+}
+
+.info-content {
+  padding: 30px;
+  display: flex;
+  gap: 50px;
+  flex-wrap: wrap;
+}
+
+.info-left,
+.info-right {
+  flex: 1;
+  min-width: 280px;
+}
+
+.info-left h3,
+.info-right h3 {
+  font-size: 15px;
+  font-weight: 800;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.info-left p,
+.info-right p {
+  font-size: 15px;
+  color: #444;
+  margin: 8px 0;
+}
+
+.info-left a,
+.info-right a {
+  color: #0066cc;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.info-left a:hover,
+.info-right a:hover {
+  text-decoration: underline;
+}
+
+/* ==================== PHẦN CHỈNH SỬA THÔNG TIN TÀI KHOẢN ==================== */
+.edit-form {
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  max-width: 730px;
+  margin-top: -20px;
+}
+
+.edit-form h1 {
+  font-size: 24px;
+  font-weight: 900;
+  color: #e31837;
+  margin-bottom: 10px;
+  margin-left: 0;
+}
+
+.edit-form > p {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 30px;
+}
+
+.form-group {
+  margin-bottom: 22px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #333;
+  font-size: 15px;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="password"] {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 15px;
+  transition: border 0.3s ease;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #e31837;
+  box-shadow: 0 0 0 3px rgba(227, 24, 55, 0.15);
+}
+
+.checkbox-group {
+  margin: 25px 0;
+}
+
+.checkbox-group label {
+  font-weight: 600;
+  color: #333;
+  cursor: pointer;
+  user-select: none;
+}
+
+.checkbox-group input[type="checkbox"] {
+  margin-right: 10px;
+  transform: scale(1.2);
+}
+
+#password-fields {
+  margin-top: 20px;
+}
+
+.required {
+  color: #e31837;
+  font-weight: bold;
+}
+
+.error-msg {
+  color: #e31837;
+  font-size: 13px;
+  margin-top: 6px;
+  display: block;
+}
+
+.form-buttons {
+  margin-top: 30px;
+  display: flex;
+  gap: 15px;
+  justify-content: flex-end;
+}
+
+.btn-cancel {
+  padding: 12px 30px;
+  background: #f0f0f0;
+  color: #666;
+  border: none;
+  border-radius: 30px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-cancel:hover {
+  background: #e0e0e0;
+}
+
+.btn-update {
+  padding: 12px 40px;
+  background: #e31837;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  font-size: 16px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-update:hover {
+  background: #c5112b;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(227, 24, 55, 0.3);
+}
+
+.alert-success {
+  background: #d4edda;
+  color: #155724;
+  padding: 15px 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-size: 15px;
+  font-weight: 600;
+  border-left: 5px solid #28a745; /* viền trái xanh cho đẹp hơn */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* ==================== PHẦN ĐỊA CHỈ GIAO HÀNG - THÊM ĐỊA CHỈ MỚI ==================== */
+.address-form-box {
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  max-width: 730px;
+  margin-top: -14px;
+}
+
+.address-form-box h2 {
+  color: #e31837;
+  font-size: 22px;
+  font-weight: 900;
+  margin-bottom: 25px;
+  margin-left: 0;
+}
+
+.address-form .form-group {
+  margin-bottom: 25px;
+  margin-top: 22px;
+}
+
+.address-form input[type="text"],
+.address-form input[type="tel"],
+.address-form textarea {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 15px;
+  background: #fff;
+  transition: border 0.3s ease;
+}
+
+.address-form input:focus,
+.address-form textarea:focus {
+  outline: none;
+  border-color: #e31837;
+  box-shadow: 0 0 0 3px rgba(227, 24, 55, 0.15);
+}
+
+.address-form textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+/* Nút trong form địa chỉ */
+.address-form .form-buttons {
+  margin-top: 35px;
+  display: flex;
+  gap: 15px;
+  justify-content: flex-start; /* nút bên trái như ảnh mẫu */
+}
+
+.address-form .btn-cancel {
+  padding: 12px 35px;
+  background: #f0f0f0;
+  color: #666;
+  border: none;
+  border-radius: 30px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.address-form .btn-cancel:hover {
+  background: #e0e0e0;
+}
+
+.address-form .btn-update {
+  padding: 12px 40px;
+  background: #e31837;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  font-weight: 800;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.address-form .btn-update:hover {
+  background: #c5112b;
+  transform: translateY(-2px);
+}
+
+.address-form .form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 25px;
+  margin-top: 5px;
+}
+
+.address-form .form-group {
+  margin-bottom: 0; /* bỏ margin cũ vì dùng grid */
+}
+
+.address-form .form-group label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #333;
+  font-size: 15px;
+}
+
+.address-form select,
+.address-form input[type="text"],
+.address-form input[type="tel"] {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 15px;
+  background: white;
+  transition: border 0.3s ease;
+}
+
+.address-form select:focus,
+.address-form input:focus {
+  outline: none;
+  border-color: #e31837;
+  box-shadow: 0 0 0 3px rgba(227, 24, 55, 0.15);
+}
+
+.address-form select:disabled {
+  background: #f5f5f5;
+  color: #999;
+  cursor: not-allowed;
+}

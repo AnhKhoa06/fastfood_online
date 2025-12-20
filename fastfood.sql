@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 11, 2025 at 01:14 PM
+-- Generation Time: Dec 20, 2025 at 09:54 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -32,6 +32,7 @@ CREATE TABLE `users` (
   `username` varchar(50) NOT NULL,
   `email` varchar(100) NOT NULL,
   `phone` varchar(20) DEFAULT NULL,
+  `address` text DEFAULT NULL,
   `password` varchar(255) NOT NULL,
   `is_admin` tinyint(1) DEFAULT 0,
   `created_at` datetime DEFAULT current_timestamp()
@@ -41,11 +42,12 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `email`, `phone`, `password`, `is_admin`, `created_at`) VALUES
-(1, 'admin', 'admin@gmail.com', NULL, 'e10adc3949ba59abbe56e057f20f883e', 1, '2025-12-11 16:59:45'),
-(4, 'khoadzvcl', 'anhkhoa2406@gmail.com', '0357937048', 'e10adc3949ba59abbe56e057f20f883e', 0, '2025-12-11 17:49:23'),
-(5, 'khoapro2k55', 'anhkhoale1998@gmail.com', '01122334455', 'e10adc3949ba59abbe56e057f20f883e', 0, '2025-12-11 17:51:53'),
-(6, 'Anh Khoa', 'khoadeptrai2025@gmail.com', '0999888777', 'e10adc3949ba59abbe56e057f20f883e', 0, '2025-12-11 18:10:59');
+INSERT INTO `users` (`id`, `username`, `email`, `phone`, `address`, `password`, `is_admin`, `created_at`) VALUES
+(1, 'admin', 'admin@gmail.com', NULL, NULL, 'e10adc3949ba59abbe56e057f20f883e', 1, '2025-12-11 16:59:45'),
+(4, 'khoadzvcl', 'anhkhoa2406@gmail.com', '0357937048', NULL, 'e10adc3949ba59abbe56e057f20f883e', 0, '2025-12-11 17:49:23'),
+(5, 'khoapro2k55', 'anhkhoale1998@gmail.com', '01122334455', NULL, 'e10adc3949ba59abbe56e057f20f883e', 0, '2025-12-11 17:51:53'),
+(6, 'Anh Khoa', 'khoadeptrai2025@gmail.com', '0999888777', '237 Thanh Niên, Phường Quang Trung, Thành phố Quy Nhơn, Tỉnh Bình Định', 'fcea920f7412b5da7be0cf42b8c93759', 0, '2025-12-11 18:10:59'),
+(7, 'khoadzvcl123', 'anhkhoa@gmail.com', '0999888777', NULL, 'e10adc3949ba59abbe56e057f20f883e', 0, '2025-12-16 07:41:28');
 
 --
 -- Indexes for dumped tables
@@ -67,7 +69,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

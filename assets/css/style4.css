@@ -857,13 +857,14 @@ body {
   padding: 40px 0;
   font-size: 14px;
   line-height: 1.6;
+  margin-bottom: -40px;
 }
 
 .container {
   width: 1140px;
   max-width: 100%;
   margin: 0 auto;
-  padding: 0 15px;
+  padding: 0 25px;
 }
 
 /* Flexbox chia cột */
@@ -880,7 +881,7 @@ body {
 
 /* CỘT 1: LOGO & INFO */
 .footer-logo {
-  width: 80px;
+  width: 90px;
   background: white;
   padding: 5px;
   border-radius: 50%;
@@ -1040,15 +1041,6 @@ body {
 
 .user-menu.open #dropdown-arrow {
   transform: rotate(180deg);
-}
-
-/* CSS Tin tức*/
-body {
-  font-family: Arial, Helvetica, sans-serif;
-  margin: 0;
-  padding: 40px 20px;
-  background-color: #ffffff;
-  color: #333;
 }
 
 .container {
