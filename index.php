@@ -10,7 +10,7 @@ require_once 'admin/config/db.php'
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="icon" type="image/png" href="assets/img/header/logo.jpg">
         <title> Phở Anh Hai </title>
-        <link rel="stylesheet" href="assets/css/style4.css">
+        <link rel="stylesheet" href="assets/css/style5.css">
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     </head>
@@ -395,4 +395,3 @@ require_once 'admin/config/db.php'
     </body>
 </html>
    
-

@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="icon" type="image/png" href="picture/logo.png">
         <title> FastFood Online </title>
-        <link rel="stylesheet" href="././assets/css/style4.css">
+        <link rel="stylesheet" href="././assets/css/style5.css">
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
     </head>
     <body>
