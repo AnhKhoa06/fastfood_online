@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th12 22, 2025 lúc 12:46 PM
+-- Thời gian đã tạo: Th12 22, 2025 lúc 01:41 PM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.2.12
 
@@ -78,7 +78,6 @@ INSERT INTO `products` (`prd_id`, `category_id`, `prd_name`, `image`, `price`, `
 (3, 11, '1 Mì Ý Jolly vừa + 1 Gà Giòn Vui Vẻ + 1 Khoai tây chiên vừa + 1 Nước ngọt', 'mon2.jpg', 75000.00, '1 Mì Ý Jolly vừa + 1 Gà Giòn Vui Vẻ + 1 Khoai tây chiên vừa + 1 Nước ngọt', 'nước coca', 12),
 (4, 10, '2 miếng Gà Sốt Cay', 'mon3.jpg', 90000.00, '2 miếng Gà Sốt Cay', '2 miếng Gà Sốt Cay', 5),
 (5, 9, '1 Burger Tôm + 1 Khoai tây chiên vừa + 1 Nước ngọt', 'mon4.webp', 99000.00, '1 Burger Tôm + 1 Khoai tây chiên vừa + 1 Nước ngọt', '1 Burger Tôm + 1 Khoai tây chiên vừa + 1 Nước ngọt', 14);
->>>>>>> 469296b (Đã làm xong phần quản lý sản phẩm và upload dl lên trang thực đơn)
 
 -- --------------------------------------------------------
 
@@ -107,7 +106,6 @@ INSERT INTO `users` (`id`, `username`, `email`, `phone`, `address`, `password`, 
 (5, 'khoapro2k55', 'anhkhoale1998@gmail.com', '01122334455', NULL, 'e10adc3949ba59abbe56e057f20f883e', 0, '2025-12-11 17:51:53'),
 (6, 'Anh Khoa', 'khoadeptrai2025@gmail.com', '0999888777', '237 Thanh Niên, Phường Quang Trung, Thành phố Quy Nhơn, Tỉnh Bình Định', 'fcea920f7412b5da7be0cf42b8c93759', 0, '2025-12-11 18:10:59'),
 (8, 'naovotrong', 'skajbdkasbdkjbasdkjb@gmail.com', '12983713', NULL, '202cb962ac59075b964b07152d234b70', 0, '2025-12-20 19:15:26');
->>>>>>> 469296b (Đã làm xong phần quản lý sản phẩm và upload dl lên trang thực đơn)
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -127,7 +125,6 @@ ALTER TABLE `products`
   ADD KEY `category_id` (`category_id`);
 
 --
->>>>>>> 469296b (Đã làm xong phần quản lý sản phẩm và upload dl lên trang thực đơn)
 -- Chỉ mục cho bảng `users`
 --
 ALTER TABLE `users`
