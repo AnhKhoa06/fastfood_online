@@ -21,42 +21,37 @@ require_once 'admin/config/db.php'
                 <button class="active"><li><a href="#trang-chu">TRANG CHỦ</a></li></button>
                 <button><li><a href="#ve-anh-hai">VỀ ANH HAI</a></li></button>
 
-                <!-- MỤC THỰC ĐƠN CÓ DROPDOWN -->
+                <!-- MỤC THỰC ĐƠN CÓ DROPDOWN - PHIÊN BẢN ĐỘNG HOÀN CHỈNH -->
                 <button class="has-dropdown">
                     <li><a href="menu.php">THỰC ĐƠN</a></li>
                     <div class="mega-dropdown">
-                        <div class="dropdown-item">
-                            <img src="assets/img/header/mon1.webp" alt="Combo">
-                            <span>MÓN NGON PHẢI THỬ</span>
-                        </div>
-                        <div class="dropdown-item">
-                            <img src="assets/img/header/mon2.webp" alt="Gà giòn">
-                            <span>GÀ GIÒN VUI VẺ</span>
-                        </div>
-                        <div class="dropdown-item">
-                            <img src="assets/img/header/mon3.webp" alt="Mỳ Jolly">
-                            <span>MỲ JOLLY</span>
-                        </div>
-                        <div class="dropdown-item">
-                            <img src="assets/img/header/mon4.webp" alt="Gà sốt cay">
-                            <span>GÀ SỐT CAY</span>
-                        </div>
-                        <div class="dropdown-item">
-                            <img src="assets/img/header/mon5.webp" alt="Burger">
-                            <span>BURGER.COM</span>
-                        </div>
-                        <div class="dropdown-item">
-                            <img src="assets/img/header/mon6.webp" alt="Phần ăn phụ">
-                            <span>PHẦN ĂN PHỤ</span>
-                        </div>
-                        <div class="dropdown-item">
-                            <img src="assets/img/header/mon7.webp" alt="Tráng miệng">
-                            <span>MÓN TRÁNG MIỆNG</span>
-                        </div>
-                        <div class="dropdown-item">
-                            <img src="assets/img/header/mon8.webp" alt="Thức uống">
-                            <span>THỨC UỐNG</span>
-                        </div>
+                        <?php
+                        // Lấy 8 danh mục MỚI NHẤT (ID lớn nhất → mới thêm hiện đầu tiên)
+                        $sql_menu = "SELECT category_id, category_name, image FROM categories ORDER BY category_id DESC LIMIT 8";
+                        $query_menu = mysqli_query($connect, $sql_menu);
+
+                        if (mysqli_num_rows($query_menu) > 0):
+                            while ($row = mysqli_fetch_assoc($query_menu)):
+                                $category_id   = $row['category_id'];
+                                $category_name = htmlspecialchars($row['category_name']);
+                                // Đường dẫn ảnh đúng cho frontend (không có "admin/")
+                                $image_path    = 'admin/img1/' . htmlspecialchars($row['image']);
+                                // Link đến trang danh mục chi tiết (thay đổi nếu bạn có file khác)
+                                $category_link = 'danh-muc.php?id=' . $category_id; 
+                                // Hoặc nếu dùng slug: 'danh-muc/' . $category_id . '-' . create_slug($category_name) . '.html';
+                        ?>
+                                <a href="<?php echo $category_link; ?>" class="dropdown-item">
+                                    <img src="<?php echo $image_path; ?>" alt="<?php echo $category_name; ?>">
+                                    <span><?php echo $category_name; ?></span>
+                                </a>
+                        <?php
+                            endwhile;
+                        else:
+                        ?>
+                            <div class="dropdown-item text-center text-muted">
+                                <span>Chưa có danh mục nào</span>
+                            </div>
+                        <?php endif; ?>
                     </div>
                 </button>
                 <!-- HẾT DROPDOWN -->
@@ -179,7 +174,11 @@ require_once 'admin/config/db.php'
                             <div class="quad-menu">
                                 <?php
                                 // Lấy tất cả danh mục từ database, sắp xếp theo ID (hoặc bạn có thể thêm cột sort_order sau)
+<<<<<<< HEAD
                                 $sql = "SELECT * FROM categories ORDER BY category_id ASC";
+=======
+                                $sql = "SELECT * FROM categories ORDER BY category_id ASC LIMIT 4";
+>>>>>>> 469296b (Đã làm xong phần quản lý sản phẩm và upload dl lên trang thực đơn)
                                 $query = mysqli_query($connect, $sql);
 
                                 while ($row = mysqli_fetch_assoc($query)) {
