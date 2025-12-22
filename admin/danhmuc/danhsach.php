@@ -1,11 +1,6 @@
 <?php
-<<<<<<< HEAD
-    // Lấy danh sách danh mục từ database
-    $sql = "SELECT * FROM categories ORDER BY category_id ASC";
-=======
     // Lấy danh sách danh mục - mới nhất lên đầu
     $sql = "SELECT * FROM categories ORDER BY category_id DESC";
->>>>>>> 469296b (Đã làm xong phần quản lý sản phẩm và upload dl lên trang thực đơn)
     $query = mysqli_query($connect, $sql);
 ?>
 
@@ -16,29 +11,6 @@
             <a class="btn btn-primary" href="index.php?page_layout=them_danhmuc">Thêm danh mục</a>
         </div>
         <div class="card-body">
-<<<<<<< HEAD
-            <table class="table table-bordered">
-                <thead class="thead-dark">
-                    <tr>
-                        <th>ID</th>
-                        <th>Ảnh 1</th>
-                        <th>Ảnh 2</th>
-                        <th>Sửa</th>
-                        <th>Xóa</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                        $i = 1;
-                        while($row = mysqli_fetch_assoc($query)){ ?>
-                            <tr>
-                                <td><?php echo $i++; ?></td>
-                                <td>
-                                    <img src="img1/<?php echo htmlspecialchars($row['image']); ?>" width="80" height="80" alt="Ảnh cha">
-                                </td>
-                                <td>
-                                    <img src="img1/<?php echo htmlspecialchars($row['child_image']); ?>" width="80" height="80" alt="Ảnh con">
-=======
             <?php if (mysqli_num_rows($query) == 0): ?>
                 <p class="text-center">Chưa có danh mục nào.</p>
             <?php else: ?>
@@ -69,7 +41,6 @@
                                 <td>
                                     <img src="img1/<?php echo htmlspecialchars($row['child_image']); ?>"
                                          width="80" height="80" alt="Ảnh con">
->>>>>>> 469296b (Đã làm xong phần quản lý sản phẩm và upload dl lên trang thực đơn)
                                 </td>
                                 <td>
                                     <a class="btn btn-sm btn-warning" href="index.php?page_layout=sua_danhmuc&id=<?php echo $row['category_id']; ?>">
@@ -77,37 +48,22 @@
                                     </a>
                                 </td>
                                 <td>
-<<<<<<< HEAD
-                                    <a class="btn btn-sm btn-danger" onclick="return Del(<?php echo $row['category_id']; ?>)" href="index.php?page_layout=xoa_danhmuc&id=<?php echo $row['category_id']; ?>">
-=======
                                     <a class="btn btn-sm btn-danger" onclick="return Del(<?php echo $row['category_id']; ?>)"
                                        href="index.php?page_layout=xoa_danhmuc&id=<?php echo $row['category_id']; ?>">
->>>>>>> 469296b (Đã làm xong phần quản lý sản phẩm và upload dl lên trang thực đơn)
                                         <i class="fas fa-trash"></i> Xóa
                                     </a>
                                 </td>
                             </tr>
-<<<<<<< HEAD
-                    <?php } ?>
-                </tbody>
-            </table>
-=======
                         <?php } ?>
                     </tbody>
                 </table>
             <?php endif; ?>
->>>>>>> 469296b (Đã làm xong phần quản lý sản phẩm và upload dl lên trang thực đơn)
         </div>
     </div>
 </div>
 
 <script>
-<<<<<<< HEAD
-    function Del(id){
-        return confirm("Bạn có chắc chắn muốn xóa danh mục ID: " + id + "?");
-=======
     function Del(id) {
         return confirm("Bạn có chắc chắn muốn xóa danh mục ID: " + id + "?\nHành động này không thể hoàn tác!");
->>>>>>> 469296b (Đã làm xong phần quản lý sản phẩm và upload dl lên trang thực đơn)
     }
 </script>

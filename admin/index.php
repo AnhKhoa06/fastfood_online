@@ -17,11 +17,7 @@ if (!isset($_SESSION['admin'])) {
     <link rel="icon" type="image/png" href="../img/logofpt7.png">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-<<<<<<< HEAD
-    <link rel="stylesheet" href="assets/style.css">
-=======
     <link rel="stylesheet" href="assets/style1.css">
->>>>>>> 469296b (Đã làm xong phần quản lý sản phẩm và upload dl lên trang thực đơn)
     <title>Phở_Anh_Hai | My Admin</title>
 </head>
 <body>

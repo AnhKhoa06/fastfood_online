@@ -174,11 +174,7 @@ require_once 'admin/config/db.php'
                             <div class="quad-menu">
                                 <?php
                                 // Lấy tất cả danh mục từ database, sắp xếp theo ID (hoặc bạn có thể thêm cột sort_order sau)
-<<<<<<< HEAD
-                                $sql = "SELECT * FROM categories ORDER BY category_id ASC";
-=======
                                 $sql = "SELECT * FROM categories ORDER BY category_id ASC LIMIT 4";
->>>>>>> 469296b (Đã làm xong phần quản lý sản phẩm và upload dl lên trang thực đơn)
                                 $query = mysqli_query($connect, $sql);
 
                                 while ($row = mysqli_fetch_assoc($query)) {

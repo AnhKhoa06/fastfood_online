@@ -3,11 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
-<<<<<<< HEAD
--- Thời gian đã tạo: Th12 20, 2025 lúc 03:38 PM
-=======
 -- Thời gian đã tạo: Th12 22, 2025 lúc 12:46 PM
->>>>>>> 469296b (Đã làm xong phần quản lý sản phẩm và upload dl lên trang thực đơn)
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.2.12
 
@@ -32,12 +28,8 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `categories` (
-<<<<<<< HEAD
-  `category_id` int(11) NOT NULL,
-=======
   `category_id` int(10) UNSIGNED NOT NULL,
   `category_name` varchar(255) NOT NULL DEFAULT '',
->>>>>>> 469296b (Đã làm xong phần quản lý sản phẩm và upload dl lên trang thực đơn)
   `image` varchar(255) NOT NULL,
   `child_image` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -46,13 +38,6 @@ CREATE TABLE `categories` (
 -- Đang đổ dữ liệu cho bảng `categories`
 --
 
-<<<<<<< HEAD
-INSERT INTO `categories` (`category_id`, `image`, `child_image`) VALUES
-(2, 'ga_gion_vui_ve.webp', 'e17856b74b7a0e-titlegagionvuive.webp'),
-(3, 'anh2.webp', '0a7c5c03bdcaaf-titlegasotcay.webp'),
-(4, 'anh3.webp', 'anh3.1.webp'),
-(5, 'anh4.webp', 'anh4.1.webp');
-=======
 INSERT INTO `categories` (`category_id`, `category_name`, `image`, `child_image`) VALUES
 (2, 'ảnh nền 2', 'anh2.webp', 'anh2.1.webp'),
 (3, 'ảnh nền 3', 'anh3.webp', 'anh3.1.webp'),
@@ -120,10 +105,6 @@ INSERT INTO `users` (`id`, `username`, `email`, `phone`, `address`, `password`, 
 (1, 'admin', 'admin@gmail.com', NULL, NULL, 'e10adc3949ba59abbe56e057f20f883e', 1, '2025-12-11 16:59:45'),
 (4, 'khoadzvcl', 'anhkhoa2406@gmail.com', '0357937048', NULL, 'e10adc3949ba59abbe56e057f20f883e', 0, '2025-12-11 17:49:23'),
 (5, 'khoapro2k55', 'anhkhoale1998@gmail.com', '01122334455', NULL, 'e10adc3949ba59abbe56e057f20f883e', 0, '2025-12-11 17:51:53'),
-<<<<<<< HEAD
-(6, 'Anh Khoa', 'khoadeptrai2025@gmail.com', '0999888777', '237 Thanh Niên, Phường Quang Trung, Thành phố Quy Nhơn, Tỉnh Bình Định', 'e10adc3949ba59abbe56e057f20f883e', 0, '2025-12-11 18:10:59'),
-(7, 'khoadzvcl123', 'anhkhoa@gmail.com', '0999888777', NULL, 'e10adc3949ba59abbe56e057f20f883e', 0, '2025-12-16 07:41:28');
-=======
 (6, 'Anh Khoa', 'khoadeptrai2025@gmail.com', '0999888777', '237 Thanh Niên, Phường Quang Trung, Thành phố Quy Nhơn, Tỉnh Bình Định', 'fcea920f7412b5da7be0cf42b8c93759', 0, '2025-12-11 18:10:59'),
 (8, 'naovotrong', 'skajbdkasbdkjbasdkjb@gmail.com', '12983713', NULL, '202cb962ac59075b964b07152d234b70', 0, '2025-12-20 19:15:26');
 >>>>>>> 469296b (Đã làm xong phần quản lý sản phẩm và upload dl lên trang thực đơn)
@@ -139,8 +120,6 @@ ALTER TABLE `categories`
   ADD PRIMARY KEY (`category_id`);
 
 --
-<<<<<<< HEAD
-=======
 -- Chỉ mục cho bảng `products`
 --
 ALTER TABLE `products`
@@ -164,9 +143,6 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT cho bảng `categories`
 --
 ALTER TABLE `categories`
-<<<<<<< HEAD
-  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-=======
   MODIFY `category_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
@@ -174,7 +150,6 @@ ALTER TABLE `categories`
 --
 ALTER TABLE `products`
   MODIFY `prd_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
->>>>>>> 469296b (Đã làm xong phần quản lý sản phẩm và upload dl lên trang thực đơn)
 
 --
 -- AUTO_INCREMENT cho bảng `users`
