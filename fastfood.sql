@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th12 22, 2025 lúc 04:48 PM
--- Phiên bản máy phục vụ: 10.4.32-MariaDB
--- Phiên bản PHP: 8.0.30
+-- Host: 127.0.0.1
+-- Generation Time: Dec 22, 2025 at 05:43 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Cơ sở dữ liệu: `fastfood`
+-- Database: `fastfood`
 --
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `categories`
+-- Table structure for table `categories`
 --
 
 CREATE TABLE `categories` (
@@ -35,7 +35,7 @@ CREATE TABLE `categories` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `categories`
+-- Dumping data for table `categories`
 --
 
 INSERT INTO `categories` (`category_id`, `category_name`, `image`, `child_image`) VALUES
@@ -55,7 +55,7 @@ INSERT INTO `categories` (`category_id`, `category_name`, `image`, `child_image`
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `news`
+-- Table structure for table `news`
 --
 
 CREATE TABLE `news` (
@@ -68,7 +68,7 @@ CREATE TABLE `news` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `news`
+-- Dumping data for table `news`
 --
 
 INSERT INTO `news` (`news_id`, `image`, `category`, `title`, `content`, `created_at`) VALUES
@@ -80,7 +80,7 @@ INSERT INTO `news` (`news_id`, `image`, `category`, `title`, `content`, `created
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `products`
+-- Table structure for table `products`
 --
 
 CREATE TABLE `products` (
@@ -95,7 +95,7 @@ CREATE TABLE `products` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `products`
+-- Dumping data for table `products`
 --
 
 INSERT INTO `products` (`prd_id`, `category_id`, `prd_name`, `image`, `price`, `description`, `additional_options`, `quantity`) VALUES
@@ -107,43 +107,46 @@ INSERT INTO `products` (`prd_id`, `category_id`, `prd_name`, `image`, `price`, `
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `users`
+-- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `username` varchar(50) NOT NULL,
+  `name` varchar(100) DEFAULT NULL,
   `email` varchar(100) NOT NULL,
   `phone` varchar(20) DEFAULT NULL,
   `address` text DEFAULT NULL,
   `password` varchar(255) NOT NULL,
+  `role` enum('user','admin') DEFAULT 'user',
+  `status` enum('active','locked') DEFAULT 'active',
   `is_admin` tinyint(1) DEFAULT 0,
   `created_at` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `users`
+-- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `email`, `phone`, `address`, `password`, `is_admin`, `created_at`) VALUES
-(1, 'admin', 'admin@gmail.com', NULL, NULL, 'e10adc3949ba59abbe56e057f20f883e', 1, '2025-12-11 16:59:45'),
-(4, 'khoadzvcl', 'anhkhoa2406@gmail.com', '0357937048', NULL, 'e10adc3949ba59abbe56e057f20f883e', 0, '2025-12-11 17:49:23'),
-(5, 'khoapro2k55', 'anhkhoale1998@gmail.com', '01122334455', NULL, 'e10adc3949ba59abbe56e057f20f883e', 0, '2025-12-11 17:51:53'),
-(6, 'Anh Khoa', 'khoadeptrai2025@gmail.com', '0999888777', '237 Thanh Niên, Phường Quang Trung, Thành phố Quy Nhơn, Tỉnh Bình Định', 'fcea920f7412b5da7be0cf42b8c93759', 0, '2025-12-11 18:10:59'),
-(8, 'naovotrong', 'skajbdkasbdkjbasdkjb@gmail.com', '12983713', NULL, '202cb962ac59075b964b07152d234b70', 0, '2025-12-20 19:15:26');
+INSERT INTO `users` (`id`, `username`, `name`, `email`, `phone`, `address`, `password`, `role`, `status`, `is_admin`, `created_at`) VALUES
+(1, 'admin', NULL, 'admin@gmail.com', '01122334455', NULL, 'e10adc3949ba59abbe56e057f20f883e', 'admin', 'active', 1, '2025-12-11 16:59:45'),
+(4, 'khoadzvcl', NULL, 'anhkhoa2406@gmail.com', '0357937048', NULL, 'e10adc3949ba59abbe56e057f20f883e', 'user', 'active', 0, '2025-12-11 17:49:23'),
+(5, 'khoapro2k55', NULL, 'anhkhoale1998@gmail.com', '01122334455', NULL, 'e10adc3949ba59abbe56e057f20f883e', 'user', 'active', 0, '2025-12-11 17:51:53'),
+(6, 'Anh Khoa', NULL, 'khoadeptrai2025@gmail.com', '0999888777', '237 Thanh Niên, Phường Quang Trung, Thành phố Quy Nhơn, Tỉnh Bình Định', 'fcea920f7412b5da7be0cf42b8c93759', 'user', 'active', 0, '2025-12-11 18:10:59'),
+(8, 'naovotrong', NULL, 'skajbdkasbdkjbasdkjb@gmail.com', '12983713', NULL, '202cb962ac59075b964b07152d234b70', 'user', 'active', 0, '2025-12-20 19:15:26');
 
 --
--- Chỉ mục cho các bảng đã đổ
+-- Indexes for dumped tables
 --
 
 --
--- Chỉ mục cho bảng `news`
+-- Indexes for table `news`
 --
 ALTER TABLE `news`
   ADD PRIMARY KEY (`news_id`);
 
 --
--- Chỉ mục cho bảng `users`
+-- Indexes for table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
@@ -151,17 +154,17 @@ ALTER TABLE `users`
   ADD UNIQUE KEY `email` (`email`);
 
 --
--- AUTO_INCREMENT cho các bảng đã đổ
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT cho bảng `news`
+-- AUTO_INCREMENT for table `news`
 --
 ALTER TABLE `news`
   MODIFY `news_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
--- AUTO_INCREMENT cho bảng `users`
+-- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
