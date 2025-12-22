@@ -10,7 +10,7 @@ require_once 'admin/config/db.php'
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="icon" type="image/png" href="assets/img/header/logo.jpg">
         <title> Phở Anh Hai </title>
-        <link rel="stylesheet" href="assets/css/style5.css">
+        <link rel="stylesheet" href="assets/css/style6.css">
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     </head>
@@ -286,42 +286,47 @@ require_once 'admin/config/db.php'
 
         <!----------Tin tức----------->
 
-        <div class="container">
-            <h1>TIN TỨC</h1>
-            <div class="news-grid">
+<div class="container">
+    <h1>TIN TỨC</h1>
+    <div class="news-grid">
+        <?php
+        // Kết nối DB (giả sử $connect đã có)
+        $sql = "SELECT news_id, image, category, title, created_at 
+                FROM news 
+                ORDER BY created_at DESC 
+                LIMIT 4";
+        $query = mysqli_query($connect, $sql);
+
+        if (mysqli_num_rows($query) > 0) {
+            while ($row = mysqli_fetch_assoc($query)) {
+                $news_id = $row['news_id'];
+                $main_title = htmlspecialchars($row['category']); // Tiêu đề chính: category
+                $desc = htmlspecialchars($row['title']); // Tiêu đề phụ: lấy toàn bộ từ cột title
+                $image = htmlspecialchars($row['image']);
+                ?>
                 <div class="news-item">
-                    <img src="https://jollibee.com.vn/media/wysiwyg/TT1.jpg" alt="Jollibee 200 cửa hàng">
+                    <a href="news.php?id=<?php echo $news_id; ?>">
+                        <img src="admin/img2/<?php echo $image; ?>" alt="<?php echo $main_title; ?>">
+                    </a>
                     <div class="news-content">
-                        <div class="news-title">JOLLIBEE ĐẠT MỐC 200 CỬA HÀNG TẠI THỊ TRƯỜNG VIỆT NAM</div>
-                        <div class="news-desc">Sự kiện khai trương cửa hàng thứ 200 là cột mốc quan trọng trong kế hoạch mở rộng kinh...</div>
+                        <a href="news.php?id=<?php echo $news_id; ?>">
+                            <div class="news-title"><?php echo $main_title; ?></div>
+                        </a>
+                        <div class="news-desc"><?php echo $desc; ?></div>
                     </div>
                 </div>
-                <div class="news-item">
-                    <img src="https://jollibee.com.vn/media/wysiwyg/WEB_200STORE-02.jpg" alt="Hợp tác bền vững">
-                    <div class="news-content">
-                        <div class="news-title">HỢP TÁC BỀN VỮNG GIÚP JOLLIBEE PHÁT TRIỂN TẠI VIỆT NAM SAU HAI THẬP KỶ</div>
-                        <div class="news-desc">Việc có chung mục tiêu và mối quan hệ hợp tác chặt chẽ với các đối tác giúp Jollibee Việt...</div>
-                    </div>
-                </div>
-                <div class="news-item">
-                    <img src="https://jollibee.com.vn/media/wysiwyg/thumbnail.jpg" alt="Cửa hàng thứ 191">
-                    <div class="news-content">
-                        <div class="news-title">JOLLIBEE VIỆT NAM KHAI TRƯƠNG CỬA HÀNG THỨ 191</div>
-                        <div class="news-desc">Vào ngày 17/05/2024, tại tuyến phố Mê Linh sầm uất của phường Liên Bảo, thành...</div>
-                    </div>
-                </div>
-                <div class="news-item">
-                    <img src="https://jollibee.com.vn/media/wysiwyg/Capture_1.PNG" alt="Cửa hàng thứ 150">
-                    <div class="news-content">
-                        <div class="news-title">JOLLIBEE VIỆT NAM KHAI TRƯƠNG CỬA HÀNG THỨ 150</div>
-                        <div class="news-desc">Jollibee Việt Nam đã đưa vào vận hành nhà máy mới với chứng nhận ISO 22000:2018 về...</div>
-                    </div>
-                </div>
-            </div>
-            <div class="view-more">
-                <button class="view-more-btn">Xem thêm</button>
-            </div>
-        </div>
+                <?php
+            }
+        } else {
+            echo '<p>Chưa có tin tức nào.</p>';
+        }
+        ?>
+    </div>
+
+    <div class="view-more">
+        <a href="tintuc.php" class="view-more-btn">Xem thêm</a>
+    </div>
+</div>
 
 
 
