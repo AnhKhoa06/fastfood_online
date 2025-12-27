@@ -115,17 +115,34 @@ require_once 'admin/config/db.php'
         </div>
         <!-- Site banner slider (separate from navbar) -->
 
+<?php
+// Lấy tất cả banner từ database, sắp xếp theo created_at giảm dần (mới nhất trước)
+// hoặc bạn có thể thêm cột `sort_order` để sắp xếp thủ công nếu cần
+$sql = "SELECT image FROM banners ORDER BY created_at DESC";
+$query = mysqli_query($connect, $sql);
+
+if (!$query) {
+    echo "<p>Lỗi kết nối cơ sở dữ liệu!</p>";
+    $banners = [];
+} else {
+    $banners = mysqli_fetch_all($query, MYSQLI_ASSOC);
+}
+?>
+
         <div class="slider-wrapper">
             <div class="slider">
-                <div class="slide"><img src="uploads/banners/bn1.jpg" alt="Banner 1"></div>
-                <div class="slide"><img src="uploads/banners/bn2.jpg" alt="Banner 2"></div>
-                <div class="slide"><img src="uploads/banners/bn3.jpg" alt="Banner 3"></div>
-                <div class="slide"><img src="uploads/banners/bn4.jpg" alt="Banner 4"></div>
-                <div class="slide"><img src="uploads/banners/bn5.jpg" alt="Banner 5"></div>
-                <div class="slide"><img src="uploads/banners/bn6.jpg" alt="Banner 6"></div>
-                <div class="slide"><img src="uploads/banners/bn7.jpg" alt="Banner 7"></div>
-                <div class="slide"><img src="uploads/banners/bn8.jpg" alt="Banner 8"></div>
-                <div class="slide"><img src="uploads/banners/bn9.jpg" alt="Banner 9"></div>
+                <?php if (empty($banners)): ?>
+                    <div class="slide">
+                        <img src="uploads/banners/default-banner.jpg" alt="Banner mặc định">
+                    </div>
+                <?php else: ?>
+                    <?php foreach ($banners as $index => $banner): ?>
+                        <div class="slide">
+                            <img src="admin/img/<?php echo htmlspecialchars($banner['image']); ?>" 
+                                alt="Banner <?php echo $index + 1; ?>">
+                        </div>
+                    <?php endforeach; ?>
+                <?php endif; ?>
             </div>
 
             <!-- Nút prev / next -->
