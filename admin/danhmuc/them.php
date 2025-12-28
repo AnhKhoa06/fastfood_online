@@ -106,6 +106,5 @@
 
         <button type="submit" name="submit" class="btn btn-primary">Thêm danh mục</button>
         <a href="index.php?page_layout=danhmuc" class="btn btn-secondary ml-2">Hủy</a>
->>>>>>> 469296b (Đã làm xong phần quản lý sản phẩm và upload dl lên trang thực đơn)
     </form>
 </div>

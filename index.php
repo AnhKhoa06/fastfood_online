@@ -10,7 +10,7 @@ require_once 'admin/config/db.php'
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="icon" type="image/png" href="assets/img/header/logo.jpg">
         <title> Phở Anh Hai </title>
-        <link rel="stylesheet" href="assets/css/style6.css">
+        <link rel="stylesheet" href="assets/css/style.css">
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     </head>
@@ -18,15 +18,24 @@ require_once 'admin/config/db.php'
         <div class="navb">
             <img type="image/webp" src="assets/img/header/logo.jpg" alt="">
             <ul class="menu">                            
-                <button class="active"><li><a href="#trang-chu">TRANG CHỦ</a></li></button>
-                <button><li><a href="#ve-anh-hai">VỀ ANH HAI</a></li></button>
+                <?php
+                $current_page = basename($_SERVER['PHP_SELF']); // lấy tên file hiện tại
+                ?>
+                <!-- TRANG CHỦ -->
+                <button class="<?php echo ($current_page === 'index.php') ? 'active' : ''; ?>" onclick="window.location.href='./index.php'">
+                    <li><a href="index.php">TRANG CHỦ</a></li>
+                </button>
 
-                <!-- MỤC THỰC ĐƠN CÓ DROPDOWN - PHIÊN BẢN ĐỘNG HOÀN CHỈNH -->
-                <button class="has-dropdown">
+                <!-- VỀ ANH HAI -->
+                <button onclick="window.location.href='#ve-anh-hai'">
+                    <li><a href="#ve-anh-hai">VỀ ANH HAI</a></li>
+                </button>
+
+                <!-- THỰC ĐƠN CÓ DROPDOWN -->
+                <button class="has-dropdown <?php echo ($current_page === 'menu.php') ? 'active' : ''; ?>" onclick="window.location.href='./menu.php'">
                     <li><a href="menu.php">THỰC ĐƠN</a></li>
                     <div class="mega-dropdown">
                         <?php
-                        // Lấy 8 danh mục MỚI NHẤT (ID lớn nhất → mới thêm hiện đầu tiên)
                         $sql_menu = "SELECT category_id, category_name, image FROM categories ORDER BY category_id DESC LIMIT 8";
                         $query_menu = mysqli_query($connect, $sql_menu);
 
@@ -34,13 +43,12 @@ require_once 'admin/config/db.php'
                             while ($row = mysqli_fetch_assoc($query_menu)):
                                 $category_id   = $row['category_id'];
                                 $category_name = htmlspecialchars($row['category_name']);
-                                // Đường dẫn ảnh đúng cho frontend (không có "admin/")
-                                $image_path    = 'admin/img1/' . htmlspecialchars($row['image']);
-                                // Link đến trang danh mục chi tiết (thay đổi nếu bạn có file khác)
-                                $category_link = 'danh-muc.php?id=' . $category_id; 
-                                // Hoặc nếu dùng slug: 'danh-muc/' . $category_id . '-' . create_slug($category_name) . '.html';
+                                $image_path    = './admin/img1/' . htmlspecialchars($row['image']);
+                                $category_link = './menu.php?category=' . $category_id;
+                                
+                                $is_active = (isset($_GET['category']) && (int)$_GET['category'] === $category_id) ? 'active' : '';
                         ?>
-                                <a href="<?php echo $category_link; ?>" class="dropdown-item">
+                                <a href="<?php echo $category_link; ?>" class="dropdown-item <?php echo $is_active; ?>">
                                     <img src="<?php echo $image_path; ?>" alt="<?php echo $category_name; ?>">
                                     <span><?php echo $category_name; ?></span>
                                 </a>
@@ -56,12 +64,25 @@ require_once 'admin/config/db.php'
                 </button>
                 <!-- HẾT DROPDOWN -->
 
-                <button><li><a href="#khuyen-mai">KHUYẾN MÃI</a></li></button>
-                <button><li><a href="#dich-vu">DỊCH VỤ</a></li></button>
-                <button><li><a href="#tin-tuc">TIN TỨC</a></li></button>
-                <button><li><a href="#cua-hang">CỬA HÀNG</a></li></button>
-                <button><li><a href="#lien-he">LIÊN HỆ</a></li></button>
-                <button><li><a href="#tuyen-dung">TUYỂN DỤNG</a></li></button>
+                <!-- KHUYẾN MÃI -->
+                <button onclick="window.location.href='#khuyen-mai'">
+                    <li><a href="#khuyen-mai">KHUYẾN MÃI</a></li>
+                </button>
+
+                <!-- TIN TỨC -->
+                <button onclick="window.location.href='#tin-tuc'">
+                    <li><a href="#tin-tuc">TIN TỨC</a></li>
+                </button>
+
+                <!-- CỬA HÀNG -->
+                <button onclick="window.location.href='#cua-hang'">
+                    <li><a href="#cua-hang">CỬA HÀNG</a></li>
+                </button>
+
+                <!-- LIÊN HỆ -->
+                <button onclick="window.location.href='#lien-he'">
+                    <li><a href="#lien-he">LIÊN HỆ</a></li>
+                </button>
             </ul>
             <div class="maumethoi"></div>
             <div class="overlay">

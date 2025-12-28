@@ -6,6 +6,9 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
     header("Location: login-resigter.html");
     exit();
 }
+
+// Lấy category từ query string (từ link dropdown header)
+$category = isset($_GET['category']) ? (int)$_GET['category'] : 'all';
 ?>
 
 <!DOCTYPE html>
@@ -15,43 +18,67 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="assets/img/header/logo.jpg">
     <title>Phở Anh Hai | Thực Đơn</title>
-    <link rel="stylesheet" href="assets/css/menu.css">
+    <link rel="stylesheet" href="assets/css/menu3.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-
-</head>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <body>
     <?php include_once 'components/header.php'; ?>
 
-    <!-- Menu Tabs -->
-    <div class="menu-tabs">
-        <button class="active" data-category="all">Tất Cả</button>
-        <button data-category="mon-ngon">MÓN NGON PHẢI THỬ</button>
-        <button data-category="ga-gion">GÀ GIÒN VUI VẺ</button>
-        <button data-category="mi-jolly">MỲ JOLLY</button>
-        <button data-category="ga-sot-cay">GÀ SỐT CAY</button>
-        <button data-category="burger">BURGER.COM</button>
-        <button data-category="phu">PHẦN ĂN PHỤ</button>
-        <button data-category="trang-mieng">MÓN TRÁNG MIỆNG</button>
-        <button data-category="do-uong">THỨC UỐNG</button>
-    </div>
+    <!-- Tiêu đề trang -->
+    <h1 style="text-align: center; margin: 40px 0; color: #e31837;">THỰC ĐƠN</h1>
 
     <!-- Grid sản phẩm -->
     <div class="products-grid" id="products">
-        <!-- Đang tải... -->
         <p style="grid-column: 1/-1; text-align: center; font-size: 18px; color: #666;">Đang tải món ăn...</p>
+    </div>
+
+    <!-- Giỏ hàng cố định góc dưới phải - giống Jollibee -->
+    <div class="cart-fixed" onclick="viewCart()">
+        <i class="fa-solid fa-cart-arrow-down"></i>
+        <span class="cart-count" id="cart-count">0</span>
+        <span class="cart-label">đ</span>
     </div>
 
     <?php include_once 'components/footer.php'; ?>
 
     <script>
+        // Giỏ hàng tạm (localStorage)
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+        function updateCartCount() {
+            document.getElementById('cart-count').textContent = cart.length;
+        }
+
+        function addToCart(id) {
+            cart.push(id);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount();
+            alert('Đã thêm món ăn ID ' + id + ' vào giỏ hàng!');
+        }
+
+        function viewCart() {
+            if (cart.length === 0) {
+                alert('Giỏ hàng trống!');
+            } else {
+                alert('Giỏ hàng hiện có ' + cart.length + ' món. (Sẽ mở rộng sau!)');
+            }
+        }
+
+        // Load count khi trang load
+        updateCartCount();
+
         async function loadProducts(category = 'all') {
             const grid = document.getElementById('products');
             grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; font-size: 18px; color: #666;">Đang tải món ăn...</p>';
 
             try {
-                const response = await fetch(`get_products.php?category=${category}`);
+                let url = 'get_products.php';
+                if (category !== 'all' && category !== '13') {
+                    url += `?category=${category}`;
+                }
+
+                const response = await fetch(url);
                 const products = await response.json();
 
                 if (products.length === 0) {
@@ -79,23 +106,16 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
             }
         }
 
-        // Tab click
-        document.querySelectorAll('.menu-tabs button').forEach(btn => {
-            btn.addEventListener('click', () => {
-                document.querySelector('.menu-tabs .active').classList.remove('active');
-                btn.classList.add('active');
-                loadProducts(btn.dataset.category);
-            });
-        });
+        // Load sản phẩm theo category từ URL
+        const urlParams = new URLSearchParams(window.location.search);
+        let categoryFromUrl = urlParams.get('category') || 'all';
 
-        // Load mặc định
-        loadProducts();
-
-        // Hàm thêm vào giỏ (có thể mở rộng sau)
-        function addToCart(id) {
-            alert('Đã thêm món ăn ID ' + id + ' vào giỏ hàng!');
-            // Sau này: gửi AJAX đến cart.php hoặc dùng localStorage
+        // Đặc biệt: nếu category_id = 13 → load 'all'
+        if (categoryFromUrl === '13') {
+            categoryFromUrl = 'all';
         }
+
+        loadProducts(categoryFromUrl);
     </script>
 </body>
 </html>

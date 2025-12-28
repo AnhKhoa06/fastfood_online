@@ -49,13 +49,10 @@ if (!isset($_SESSION['admin'])) {
                 <i class="fas fa-folder" style="margin-right: 7px;"></i> Quản lý Danh Mục
             </a>
             <a href="index.php?page_layout=donhang" class="nav-link text-white">
-                <i class="fas fa-receipt" style="margin-right: 7px;"></i> Quản lý Đơn Hàng
+                <i class="fas fa-cart-plus" style="margin-right: 7px;"></i> Quản lý Đơn Hàng
             </a>
             <a href="index.php?page_layout=khuyenmai" class="nav-link text-white">
                 <i class="fas fa-gift" style="margin-right: 7px;"></i> Quản lý Khuyến Mãi
-            </a>
-            <a href="index.php?page_layout=flashsale" class="nav-link text-white">
-                <i class="fas fa-bolt" style="margin-right: 7px;"></i> Quản lý Flash Sale
             </a>
             <a href="index.php?page_layout=tintuc" class="nav-link text-white">
                 <i class="fas fa-newspaper" style="margin-right: 7px;"></i> Quản lý Tin Tức

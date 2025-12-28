@@ -308,7 +308,7 @@ body {
   pointer-events: none;
   transition: all 0.4s ease;
   z-index: 999;
-  margin-left: 250px;
+  margin-left: 150px;
   height: 145px;
 }
 
@@ -1147,12 +1147,10 @@ h1 {
   background-color: #c81c2a;
 }
 
-
 .news-item a {
-    text-decoration: none !important;
+  text-decoration: none !important;
 }
 
 .news-item .news-title {
-    text-decoration: none !important;
+  text-decoration: none !important;
 }
-

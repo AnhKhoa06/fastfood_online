@@ -58,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <div class="form-group">
                     <label for="image">Ảnh</label>
                     <input type="file" class="form-control-file" id="image" name="image">
-                    <small>Hiện tại: <img src="../<?php echo htmlspecialchars($news['image']); ?>" alt="<?php echo htmlspecialchars($news['title']); ?>" style="width: 50px; height: 50px; object-fit: cover;"></small>
+                    <small>Hiện tại: <img src="./img2/<?php echo htmlspecialchars($news['image']); ?>" alt="<?php echo htmlspecialchars($news['title']); ?>" style="width: 50px; height: 50px; object-fit: cover;"></small>
                 </div>
                 <div class="form-group">
                     <label for="category">Chủ đề</label>
