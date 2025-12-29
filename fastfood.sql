@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 28, 2025 at 10:24 AM
+-- Generation Time: Dec 29, 2025 at 12:55 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -65,17 +65,13 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`category_id`, `category_name`, `image`, `child_image`) VALUES
-(2, 'ảnh nền 2', 'anh2.webp', 'anh2.1_1766411423_bb320f80.webp'),
-(3, 'ảnh nền 3', 'anh3.webp', 'anh3.1.webp'),
-(4, 'ảnh nền 4', 'anh4.webp', 'anh4.1.webp'),
-(5, 'ảnh nền 1', 'anh1_1766311085_83a438c2.webp', 'anh1.2_1766311085_34a35be4.webp'),
 (6, 'THỨC UỐNG', 'menu8_1766311296_09c19767.webp', 'anhtrang_1766311296_b4e572ea.png'),
-(7, 'MÓN TRÁNG MIỆNG', 'menu7.webp', 'anhtrang_1766311519_9d31a883.png'),
+(7, 'MÓN TRÁNG MIỆNG', 'menu7.webp', 'nen4.webp'),
 (8, 'PHẦN ĂN PHỤ', 'menu6.webp', 'anhtrang_1766311547_68847cc0.png'),
 (9, 'BURGER.COM', 'menu5.webp', 'anhtrang_1766311570_b83a1b4b.png'),
-(10, 'GÀ SỐT CAY', 'menu4.webp', 'anhtrang_1766311593_82cb3175.png'),
-(11, 'MỲ JOLLY', 'menu3.webp', 'anhtrang_1766311613_1f239bb4.png'),
-(12, 'GÀ GIÒN VUI VẺ', 'menu2.webp', 'anhtrang_1766311641_4d8c154d.png'),
+(10, 'GÀ SỐT CAY', 'menu4.webp', 'nen1.webp'),
+(11, 'MỲ JOLLY', 'menu3.webp', 'nen2.webp'),
+(12, 'GÀ GIÒN VUI VẺ', 'menu2.webp', 'nen3.webp'),
 (13, 'MÓN NGON PHẢI THỬ', 'menu1_1766311674_26076a88.webp', 'anhtrang_1766311674_1e47b2a4.png');
 
 -- --------------------------------------------------------

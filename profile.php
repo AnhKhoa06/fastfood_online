@@ -53,7 +53,7 @@ if ($stmt && $row = $stmt->fetch_assoc()) {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     
 <body>
-    <?php include_once 'components/header.php'; ?>
+    <?php include_once 'components/header1.php'; ?>
 
         <?php if (isset($_SESSION['update_success'])): ?>
             <div style="background: #d4edda; color: #155724; padding: 15px; border-radius: 8px; margin-bottom: 20px;">

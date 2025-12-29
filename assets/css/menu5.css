@@ -1,0 +1,165 @@
+body {
+  font-family: "Montserrat", sans-serif;
+  background: #ffffff;
+  margin: 0;
+  padding: 0;
+}
+.menu-tabs {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 20px;
+
+  overflow-x: auto;
+  white-space: nowrap;
+  margin-top: 150px;
+}
+.menu-tabs button {
+  padding: 12px 20px;
+  border: none;
+  background: #eee;
+  border-radius: 30px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.menu-tabs button.active,
+.menu-tabs button:hover {
+  background: #ff0000;
+  color: white;
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 cột */
+  gap: 0; /* bỏ gap để dùng border chia ranh giới */
+  padding: 50px 60px;
+  max-width: 1100px; /* nhỏ gọn hơn */
+  margin: 0 auto;
+  margin-top: 165px;
+  cursor: pointer;
+}
+
+/* Card sản phẩm - không bo góc, không shadow */
+.product-card {
+  background: white;
+  border-radius: 0; /* bỏ bo góc */
+  overflow: hidden;
+  text-align: center;
+  border-right: 2px dashed #ffcc00; /* nét đứt vàng chia cột phải */
+  border-bottom: 2px dashed #ffcc00; /* nét đứt vàng chia hàng dưới */
+  transition: none; /* bỏ hover toàn card */
+}
+
+/* Card cuối cột phải: bỏ border phải */
+.product-card:nth-child(3n) {
+  border-right: none;
+}
+
+/* Card cuối hàng: bỏ border dưới */
+.product-card:nth-child(n + 4) {
+  border-bottom: none;
+}
+
+/* Ảnh sản phẩm - hover scale nhẹ */
+.product-card img {
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+  transition: transform 0.2s ease;
+}
+
+.product-card:hover img {
+  transform: scale(1.06); /* chỉ ảnh scale khi hover */
+}
+
+/* Thông tin sản phẩm */
+.product-info {
+  padding: 15px 10px;
+  text-align: center;
+}
+
+.product-name {
+  font-size: 16px;
+  font-weight: 900;
+  color: #000000; /* đen như yêu cầu */
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  line-height: 1.3;
+}
+
+.product-desc {
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 12px;
+  height: 20px; /* Chỉ cao 1 dòng (tùy font-size 13px, height 20px là đủ cho 1 dòng) */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap; /* Buộc chỉ 1 dòng, không xuống dòng */
+  display: block; /* Đảm bảo block để ellipsis hoạt động */
+}
+
+.product-price {
+  font-size: 19px;
+  font-weight: 900;
+  color: #c0102d; /* đỏ đậm hơn */
+  margin-bottom: 0;
+}
+
+/* Giỏ hàng cố định góc dưới phải - giống Jollibee */
+.cart-fixed {
+  position: fixed;
+  bottom: -5px;
+  right: 40px;
+  width: 210px; /* dài ra 1 chút */
+  height: 56px;
+  background: #ffcc00; /* vàng Jollibee */
+  color: #000; /* icon đen */
+  border-radius: 15px 15px 0 0; /* bo tròn trên, dưới phẳng */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 32px;
+  cursor: pointer;
+  z-index: 1000;
+  transition: none; /* bỏ hover toàn bộ */
+  padding: 0 18px; /* padding nhiều hơn để dài ra */
+}
+
+/* Icon giỏ hàng - dùng absolute để to lên không ảnh hưởng layout */
+.cart-fixed i {
+  position: absolute;
+  left: 65px; /* vị trí cố định bên trái */
+  font-size: 32px; /* kích thước bình thường */
+  transition: font-size 0.1s ease;
+}
+
+/* Chỉ hover icon giỏ hàng (to hơn) */
+.cart-fixed:hover i {
+  font-size: 36px; /* icon to hơn khi hover */
+}
+
+/* Số lượng: bôi đen, đậm hơn */
+.cart-count {
+  color: #000; /* bôi đen */
+  font-size: 20px;
+  font-weight: 900; /* đậm hơn */
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 28px;
+  transform: translateX(10px);
+}
+
+/* Chữ "đ" có gạch chân */
+.cart-label {
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: underline; /* gạch chân */
+  transform: translateY(-3px);
+}

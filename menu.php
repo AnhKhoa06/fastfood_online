@@ -18,43 +18,33 @@ $category = isset($_GET['category']) ? (int)$_GET['category'] : 'all';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="assets/img/header/logo.jpg">
     <title>Phở Anh Hai | Thực Đơn</title>
-    <link rel="stylesheet" href="assets/css/menu3.css">
+    <link rel="stylesheet" href="assets/css/menu5.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-<body>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <?php include_once 'components/header.php'; ?>
 
     <!-- Tiêu đề trang -->
-    <h1 style="text-align: center; margin: 40px 0; color: #e31837;">THỰC ĐƠN</h1>
+    
 
-    <!-- Grid sản phẩm -->
     <div class="products-grid" id="products">
         <p style="grid-column: 1/-1; text-align: center; font-size: 18px; color: #666;">Đang tải món ăn...</p>
     </div>
 
     <!-- Giỏ hàng cố định góc dưới phải - giống Jollibee -->
     <div class="cart-fixed" onclick="viewCart()">
-        <i class="fa-solid fa-cart-arrow-down"></i>
+        <i class="bi bi-cart-check"></i>  
         <span class="cart-count" id="cart-count">0</span>
         <span class="cart-label">đ</span>
     </div>
 
     <?php include_once 'components/footer.php'; ?>
 
-    <script>
+<script>
         // Giỏ hàng tạm (localStorage)
         let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
         function updateCartCount() {
             document.getElementById('cart-count').textContent = cart.length;
-        }
-
-        function addToCart(id) {
-            cart.push(id);
-            localStorage.setItem('cart', JSON.stringify(cart));
-            updateCartCount();
-            alert('Đã thêm món ăn ID ' + id + ' vào giỏ hàng!');
         }
 
         function viewCart() {
@@ -93,10 +83,9 @@ $category = isset($_GET['category']) ? (int)$_GET['category'] : 'all';
                     card.innerHTML = `
                         <img src="${product.image}" alt="${product.name}" onerror="this.src='assets/img/placeholder.jpg'">
                         <div class="product-info">
-                            <div class="product-name">${product.name}</div>
+                            <div class="product-name">${product.name.toUpperCase()}</div>
                             <div class="product-desc">${product.description || 'Món ăn ngon, chất lượng cao cấp'}</div>
                             <div class="product-price">${product.price} đ</div>
-                            <button class="add-to-cart" onclick="addToCart(${product.id})">Thêm vào giỏ</button>
                         </div>
                     `;
                     grid.appendChild(card);

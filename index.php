@@ -10,7 +10,7 @@ require_once 'admin/config/db.php'
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="icon" type="image/png" href="assets/img/header/logo.jpg">
         <title> Phở Anh Hai </title>
-        <link rel="stylesheet" href="assets/css/style.css">
+        <link rel="stylesheet" href="assets/css/style12.css">
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     </head>
@@ -211,31 +211,40 @@ if (!$query) {
                         <div class="main-menu-wrapper">
                             <div class="quad-menu">
                                 <?php
-                                // Lấy tất cả danh mục từ database, sắp xếp theo ID (hoặc bạn có thể thêm cột sort_order sau)
-                                $sql = "SELECT * FROM categories ORDER BY category_id ASC LIMIT 4";
-                                $query = mysqli_query($connect, $sql);
+                                // Hardcode 4 ID danh mục cần hiển thị (theo thứ tự bạn muốn)
+                                $ids = [10, 11, 12, 7]; // ID 10, 11, 12 + 7
 
-                                while ($row = mysqli_fetch_assoc($query)) {
-                                    // Đường dẫn ảnh đầy đủ (thay đổi nếu thư mục img1 không public trực tiếp)
-                                    $top_img = 'admin/img1/' . htmlspecialchars($row['image']);
-                                    $bottom_img = 'admin/img1/' . htmlspecialchars($row['child_image']);
+                                foreach ($ids as $category_id) {
+                                    // Lấy thông tin danh mục theo ID
+                                    $sql = "SELECT category_id, category_name, image, child_image 
+                                            FROM categories 
+                                            WHERE category_id = $category_id 
+                                            LIMIT 1";
+                                    $query = mysqli_query($connect, $sql);
 
-                                    // Bạn cần quyết định link dẫn đến đâu khi click
-                                    // Ví dụ tạm: dẫn đến trang danh mục chi tiết, hoặc trang sản phẩm theo danh mục
-                                    // Ở đây mình để ví dụ: /danh-muc.php?id=ID
-                                    $link = '/danh-muc.php?id=' . $row['category_id']; 
-                                    // Hoặc nếu bạn có slug, thì dùng slug tốt hơn
+                                    if ($row = mysqli_fetch_assoc($query)) {
+                                        $category_name = htmlspecialchars($row['category_name']);
+                                        
+                                        // Đường dẫn ảnh
+                                        $top_img = './admin/img1/' . htmlspecialchars($row['image']);
+                                        $bottom_img = './admin/img1/' . htmlspecialchars($row['child_image']);
+                                        
+                                        // Link giống dropdown
+                                        $category_link = './menu.php?category=' . $category_id;
                                 ?>
-                                    <a href="<?php echo $link; ?>" class="quad menu">
-                                        <div class="top-img-wrapper">
-                                            <img src="<?php echo $top_img; ?>" alt="Danh mục">
-                                        </div>
-                                        <div class="bottom-img-wrapper">
-                                            <img src="<?php echo $bottom_img; ?>" alt="Danh mục">
-                                            <button class="btn btn-orange text-uppercase btn-order">Đặt hàng</button>
-                                        </div>
-                                    </a>
-                                <?php } ?>
+                                        <a href="<?php echo $category_link; ?>" class="quad menu">
+                                            <div class="top-img-wrapper">
+                                                <img src="<?php echo $top_img; ?>" alt="<?php echo $category_name; ?>">
+                                            </div>
+                                            <div class="bottom-img-wrapper">
+                                                <img src="<?php echo $bottom_img; ?>" alt="<?php echo $category_name; ?>">
+                                                <button class="btn btn-orange text-uppercase btn-order">Đặt hàng</button>
+                                            </div>
+                                        </a>
+                                <?php
+                                    }
+                                }
+                                ?>
                             </div>
                         </div>
                     </div>

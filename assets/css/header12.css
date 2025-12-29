@@ -8,7 +8,7 @@
 
 body {
   padding-top: 120px !important;
-  background: #edede2;
+  background: #ffffff;
 }
 
 .navb {
@@ -254,33 +254,6 @@ body {
   }
   to {
     width: 100%;
-  }
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .slider-wrapper {
-    height: 360px;
-    border-radius: 14px;
-    margin: 15px auto;
-  }
-  .slide {
-    padding: 8px;
-  }
-  .slide img {
-    border-radius: 12px;
-  }
-  .prev-btn,
-  .next-btn {
-    width: 44px;
-    height: 44px;
-    font-size: 24px;
-  }
-  .prev-btn {
-    left: 10px;
-  }
-  .next-btn {
-    right: 10px;
   }
 }
 
