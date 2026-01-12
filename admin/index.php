@@ -51,8 +51,8 @@ if (!isset($_SESSION['admin'])) {
             <a href="index.php?page_layout=donhang" class="nav-link text-white">
                 <i class="fas fa-cart-plus" style="margin-right: 7px;"></i> Quản lý Đơn Hàng
             </a>
-            <a href="index.php?page_layout=khuyenmai" class="nav-link text-white">
-                <i class="fas fa-gift" style="margin-right: 7px;"></i> Quản lý Khuyến Mãi
+            <a href="index.php?page_layout=cuahang" class="nav-link text-white">
+                <i class="fas fa-gift" style="margin-right: 7px;"></i> Quản lý Các Cửa Hàng
             </a>
             <a href="index.php?page_layout=tintuc" class="nav-link text-white">
                 <i class="fas fa-newspaper" style="margin-right: 7px;"></i> Quản lý Tin Tức
@@ -117,20 +117,20 @@ if (!isset($_SESSION['admin'])) {
                     break;
 
                 // --- Phần khuyến mãi ---
-                case 'khuyenmai':
-                    require_once 'khuyenmai/danhsach.php';
+                case 'cuahang':
+                    require_once 'cuahang/danhsach.php';
                     break;
 
-                case 'them_khuyenmai':
-                    require_once 'khuyenmai/them.php';
+                case 'them_cuahang':
+                    require_once 'cuahang/them.php';
                     break;
 
-                case 'sua_khuyenmai':
-                    require_once 'khuyenmai/sua.php';
+                case 'sua_cuahang':
+                    require_once 'cuahang/sua.php';
                     break;
 
-                case 'xoa_khuyenmai':
-                    require_once 'khuyenmai/xoa.php';
+                case 'xoa_cuahang':
+                    require_once 'cuahang/xoa.php';
                     break;
 
                 // --- Phần flashsale ---
