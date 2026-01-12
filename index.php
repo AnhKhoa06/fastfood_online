@@ -433,7 +433,7 @@ if (!$query) {
 
         <script src="assets/js/slider.js"></script>
         <script src="assets/js/header.js"></script>
-        <script src="assets/js/index.js"></script>
+        <script src="assets/js/index5.js"></script>
     </body>
 </html>
    

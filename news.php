@@ -1,6 +1,6 @@
 <?php
 session_start();
-include_once 'components/header.php';
+include_once 'components/header1.php';
 require_once 'admin/config/db.php'; // hoặc '../db.php' tùy vị trí
 
 // Kiểm tra ID hợp lệ

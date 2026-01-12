@@ -163,3 +163,88 @@ body {
   text-decoration: underline; /* gạch chân */
   transform: translateY(-3px);
 }
+
+/* Phần GIAO HÀNG TẬN NƠI / ĐẾN LẤY - giống Jollibee */
+.delivery-section {
+  max-width: 900px;
+  margin: 90px auto 40px; /* Nhích xuống 60px để không bị che bởi dropdown header */
+  padding: 0 20px;
+  text-align: center;
+}
+
+.delivery-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.tab-btn {
+  padding: 12px 28px;
+  border: none;
+  border-radius: 50px;
+  font-weight: 800;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.35s ease;
+  min-width: 180px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.tab-btn:not(.active) {
+  background: #e6e5e5;
+  color: #666;
+}
+
+.tab-btn.active {
+  background: #e31837;
+  color: white;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(227, 24, 55, 0.35);
+}
+
+/* Thanh tìm kiếm */
+.search-box {
+  position: relative;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+#address-input {
+  width: 100%;
+  padding: 18px 70px 18px 25px;
+  border-radius: 50px;
+  background: white;
+  font-size: 16px;
+  color: #000000;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.26);
+  outline: none;
+  border: 2px solid transparent;
+}
+
+#address-input:focus {
+  border-color: #007bff;
+  background: #f8fbff;
+}
+
+.search-btn {
+  position: absolute;
+  right: 8px;
+  top: 7.5px;
+  width: 42px;
+  height: 42px;
+  background: #e31837;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(227, 24, 55, 0.4);
+}
+
+.search-btn:hover {
+  background: #c0102d;
+  transform: scale(1.08);
+}
