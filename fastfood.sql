@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th1 12, 2026 lúc 05:16 PM
+-- Thời gian đã tạo: Th1 13, 2026 lúc 03:44 PM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.2.12
 
@@ -46,6 +46,29 @@ INSERT INTO `banners` (`id`, `image`, `created_at`) VALUES
 (10, 'bn7.jpg', '2025-12-05 21:20:00'),
 (11, 'bn8.jpg', '2025-12-05 21:21:00'),
 (12, 'bn9.jpg', '2025-12-05 21:21:00');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `cart`
+--
+
+CREATE TABLE `cart` (
+  `cart_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `quantity` int(10) UNSIGNED NOT NULL DEFAULT 1,
+  `created_at` datetime DEFAULT current_timestamp(),
+  `updated_at` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `cart`
+--
+
+INSERT INTO `cart` (`cart_id`, `user_id`, `product_id`, `quantity`, `created_at`, `updated_at`) VALUES
+(10, 10, 2, 2, '2026-01-13 16:27:02', '2026-01-13 21:42:39'),
+(12, 10, 3, 2, '2026-01-13 18:05:52', '2026-01-13 21:40:56');
 
 -- --------------------------------------------------------
 
@@ -180,12 +203,19 @@ INSERT INTO `users` (`id`, `username`, `name`, `email`, `phone`, `address`, `pas
 (4, 'khoadzvcl', NULL, 'anhkhoa2406@gmail.com', '0357937048', NULL, 'e10adc3949ba59abbe56e057f20f883e', 'user', 'active', 0, '2025-12-11 17:49:23'),
 (5, 'khoapro2k55', NULL, 'anhkhoale1998@gmail.com', '01122334455', NULL, 'e10adc3949ba59abbe56e057f20f883e', 'user', 'active', 0, '2025-12-11 17:51:53'),
 (6, 'Anh Khoa', NULL, 'khoadeptrai2025@gmail.com', '0999888777', '237 Thanh Niên, Phường Quang Trung, Thành phố Quy Nhơn, Tỉnh Bình Định', 'fcea920f7412b5da7be0cf42b8c93759', 'user', 'active', 0, '2025-12-11 18:10:59'),
-(8, 'naovotrong', NULL, 'skajbdkasbdkjbasdkjb@gmail.com', '12983714', NULL, '202cb962ac59075b964b07152d234b70', 'user', 'active', 0, '2025-12-20 19:15:26'),
-(9, 'datngo113', NULL, 'datngo@gmail.com', '0123456789', NULL, '202cb962ac59075b964b07152d234b70', 'user', 'active', 0, '2025-12-29 22:55:37');
+(9, 'datngo113', NULL, 'datngo@gmail.com', '0123456789', NULL, '202cb962ac59075b964b07152d234b70', 'user', 'active', 0, '2025-12-29 22:55:37'),
+(10, 'naovotrong', NULL, 'skajbdkasbdkjbasdkjb@gmail.com', '54151541', 'Nguyễn Thị Định, Nguyễn Văn Cừ, Phường Quy Nhơn Nam, Tỉnh Gia Lai, 55113', '202cb962ac59075b964b07152d234b70', 'user', 'active', 0, '2026-01-13 09:46:07');
 
 --
 -- Chỉ mục cho các bảng đã đổ
 --
+
+--
+-- Chỉ mục cho bảng `cart`
+--
+ALTER TABLE `cart`
+  ADD PRIMARY KEY (`cart_id`),
+  ADD UNIQUE KEY `unique_cart_item` (`user_id`,`product_id`);
 
 --
 -- Chỉ mục cho bảng `news`
@@ -212,6 +242,12 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT cho bảng `cart`
+--
+ALTER TABLE `cart`
+  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
 -- AUTO_INCREMENT cho bảng `news`
 --
 ALTER TABLE `news`
@@ -227,7 +263,7 @@ ALTER TABLE `stores`
 -- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

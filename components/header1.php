@@ -9,7 +9,7 @@ require_once 'admin/config/db.php'
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="icon" type="image/png" href="picture/logo.png">
         <title> FastFood Online </title>
-        <link rel="stylesheet" href="././assets/css/style12.css">
+        <link rel="stylesheet" href="././assets/css/style16.css">
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
         
     </head>
@@ -136,6 +136,13 @@ require_once 'admin/config/db.php'
 
     </body>
 </html>
-<script src="././assets/js/header5.js"></script>
-<script src="././assets/js/index.js"></script>
+<script src="././assets/js/header6.js"></script>
+<script>
+    // Chỉ load index5.js nếu có phần tử cần (ví dụ address-input)
+    if (document.getElementById('address-input')) {
+        const script = document.createElement('script');
+        script.src = 'assets/js/index5.js';
+        document.body.appendChild(script);
+    }
+</script>
 
