@@ -9,7 +9,7 @@ require_once 'admin/config/db.php'
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="icon" type="image/png" href="assets/img/header/logo.jpg">
-        <title> Phở Anh Hai </title>
+        <title>Domino's Fastfood</title>
         <link rel="stylesheet" href="assets/css/style16.css">
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -715,7 +715,7 @@ if (!$query) {
                             <img src="https://jollibee.com.vn/media/3478848e-3b8f-45f8-bc64-32e112922a8b.png" alt="Đặt hàng online">
                         </div>
                         <h3>LẤY TẠI CỬA HÀNG</h3>
-                        <a href="#" class="btn-service">XEM THÊM</a>
+                        <a href="menu.php" class="btn-service">XEM THÊM</a>
                     </div>
 
                     <!-- Dịch vụ 2 -->
@@ -755,7 +755,7 @@ if (!$query) {
                 <p>
                     Chúng tôi là Phở Anh Hai Việt Nam với hơn 200 cửa hàng trên khắp cả nước, chúng tôi mong muốn đem đến niềm vui ẩm thực cho mọi gia đình Việt bằng những món ăn có chất lượng tốt, hương vị tuyệt hảo, dịch vụ chu đáo với một mức giá hợp lý. Hãy đến và thưởng thức nhé!
                 </p>
-                <a href="#" class="btn-dat-hang">ĐẶT HÀNG</a>
+                <a href="menu.php" class="btn-dat-hang">ĐẶT HÀNG</a>
             </div>
         </div>
 

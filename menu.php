@@ -17,7 +17,7 @@ $category = isset($_GET['category']) ? (int)$_GET['category'] : 'all';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="assets/img/header/logo.jpg">
-    <title>Phở Anh Hai | Thực Đơn</title>
+    <title>Domino's Fastfood| Thực Đơn</title>
     <link rel="stylesheet" href="assets/css/menu8.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">

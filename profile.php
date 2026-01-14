@@ -44,7 +44,7 @@ if ($stmt && $row = $stmt->fetch_assoc()) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="assets/img/header/logo.jpg">
-    <title>Phở Anh Hai | Tài khoản của tôi</title>
+    <title>Domino's Fastfood</title>
     <link rel="stylesheet" href="assets/css/profile5.css"> <!-- File CSS riêng -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">

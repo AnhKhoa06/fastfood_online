@@ -7,8 +7,8 @@ require_once 'admin/config/db.php'
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="icon" type="image/png" href="picture/logo.png">
-        <title> FastFood Online </title>
+        <link rel="icon" type="image/png" href="assets/img/header/logo.jpg">
+        <title>Domino's Fastfood</title>
         <link rel="stylesheet" href="././assets/css/style16.css">
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
         
@@ -100,7 +100,7 @@ require_once 'admin/config/db.php'
                         <span style="color: black; font-weight: bold; font-size: 14px; margin-left: -4px; margin-right: 20px;">
                             Xin chào, <?php echo $username; ?>
                         </span>
-                        <i class="fas fa-caret-down" id="dropdown-arrow" style="margin-left: 47px; color: #e31837;"></i>
+                        <i class="fas fa-caret-down" id="dropdown-arrow" style="margin-left: 61px; color: #e31837;"></i>
 
                         <div class="dropdown-menu" id="user-dropdown">
                             <a href="profile.php">Tài khoản của tôi</a>

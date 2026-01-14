@@ -11,7 +11,7 @@ if ($category_id !== 'all') {
     $sql .= " WHERE p.category_id = $category_id";
 }
 
-$sql .= " ORDER BY p.prd_id DESC";
+$sql .= " ORDER BY p.prd_id ASC";
 
 $query = mysqli_query($connect, $sql);
 $products = [];

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 14, 2026 at 12:18 PM
+-- Generation Time: Jan 14, 2026 at 03:20 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -45,7 +45,7 @@ INSERT INTO `banners` (`id`, `image`, `created_at`) VALUES
 (9, 'bn6.jpg', '2025-12-05 21:20:00'),
 (10, 'bn7.jpg', '2025-12-05 21:20:00'),
 (11, 'bn8.jpg', '2025-12-05 21:21:00'),
-(12, 'bn9.jpg', '2025-12-05 21:21:00');
+(12, '1768398804_pizza1.jpg', '2025-12-05 21:21:00');
 
 -- --------------------------------------------------------
 
@@ -69,7 +69,7 @@ CREATE TABLE `cart` (
 INSERT INTO `cart` (`cart_id`, `user_id`, `product_id`, `quantity`, `created_at`, `updated_at`) VALUES
 (24, 6, 3, 1, '2026-01-14 13:50:35', '2026-01-14 13:50:35'),
 (36, 10, 4, 1, '2026-01-14 18:06:05', '2026-01-14 18:06:05'),
-(44, 1, 3, 1, '2026-01-14 18:17:03', '2026-01-14 18:17:03');
+(45, 1, 2, 1, '2026-01-14 20:40:08', '2026-01-14 20:40:08');
 
 -- --------------------------------------------------------
 
@@ -91,7 +91,7 @@ CREATE TABLE `categories` (
 INSERT INTO `categories` (`category_id`, `category_name`, `image`, `child_image`) VALUES
 (6, 'THỨC UỐNG', 'menu8_1766311296_09c19767.webp', 'anhtrang_1766311296_b4e572ea.png'),
 (7, 'MÓN TRÁNG MIỆNG', 'menu7.webp', 'nen4.webp'),
-(8, 'PHẦN ĂN PHỤ', 'menu6.webp', 'anhtrang_1766311547_68847cc0.png'),
+(8, 'PIZZA', 'pz.jpg', 'anhtrang_1766311547_68847cc0.png'),
 (9, 'BURGER.COM', 'menu5.webp', 'anhtrang_1766311570_b83a1b4b.png'),
 (10, 'GÀ SỐT CAY', 'menu4.webp', 'nen1.webp'),
 (11, 'MỲ JOLLY', 'menu3.webp', 'nen2.webp'),
@@ -147,7 +147,8 @@ CREATE TABLE `orders` (
 INSERT INTO `orders` (`id`, `user_id`, `order_code`, `created_at`, `payment_method`, `status`, `total_amount`, `delivery_mode`) VALUES
 (59, 1, 'DH724727259', '2026-01-14 18:15:55', 'cod', 'Chờ xác nhận', 165000.00, 'delivery'),
 (60, 1, 'DH159557560', '2026-01-14 18:16:08', 'cod', 'Chờ xác nhận', 65000.00, 'delivery'),
-(61, 1, 'DH323163043', '2026-01-14 18:17:14', 'cod', 'Đã giao', 198000.00, 'delivery');
+(61, 1, 'DH323163043', '2026-01-14 18:17:14', 'cod', 'Đã giao', 198000.00, 'delivery'),
+(62, 1, 'DH913519023', '2026-01-14 20:40:24', 'cod', 'Đã giao', 249000.00, 'delivery');
 
 -- --------------------------------------------------------
 
@@ -173,7 +174,9 @@ INSERT INTO `order_details` (`id`, `order_id`, `product_id`, `product_code`, `pr
 (42, 59, 4, 'MON002', '2 miếng Gà Sốt Cay', 1, 90000.00),
 (43, 59, 3, 'MON003', '1 Mì Ý Jolly vừa + 1 Gà Giòn Vui Vẻ + 1 Khoai tây chiên vừa + 1 Nước ngọt', 1, 75000.00),
 (44, 60, 2, 'MON004', '2 MIẾNG GÀ GIÒN VUI VẺ', 1, 65000.00),
-(45, 61, 5, 'MON00145', '1 Burger Tôm + 1 Khoai tây chiên vừa + 1 Nước ngọt', 2, 99000.00);
+(45, 61, 5, 'MON00145', '1 Burger Tôm + 1 Khoai tây chiên vừa + 1 Nước ngọt', 2, 99000.00),
+(46, 62, 3, 'MON003', '1 Mì Ý Jolly vừa + 1 Gà Giòn Vui Vẻ + 1 Khoai tây chiên vừa + 1 Nước ngọt', 2, 75000.00),
+(47, 62, 5, 'MON00145', '1 Burger Tôm + 1 Khoai tây chiên vừa + 1 Nước ngọt', 1, 99000.00);
 
 -- --------------------------------------------------------
 
@@ -198,10 +201,18 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`prd_id`, `product_code`, `category_id`, `prd_name`, `image`, `price`, `description`, `additional_options`, `quantity`) VALUES
+(1, 'MON005', 8, 'Pizza Siêu Topping Hải Sản Xốt Mayonnaise - Super Topping Ocean Mania', 'pz1.jpg', 225000.00, 'Pizza Siêu Topping Hải Sản Xốt Mayonnaise - Super Topping Ocean Mania', '..', 10),
 (2, 'MON004', 12, '2 MIẾNG GÀ GIÒN VUI VẺ', 'mon1.webp', 65000.00, '2 miếng gà và tương ớt', 'coca', 10),
 (3, 'MON003', 11, '1 Mì Ý Jolly vừa + 1 Gà Giòn Vui Vẻ + 1 Khoai tây chiên vừa + 1 Nước ngọt', 'mon2.jpg', 75000.00, '1 Mì Ý Jolly vừa + 1 Gà Giòn Vui Vẻ + 1 Khoai tây chiên vừa + 1 Nước ngọt', 'nước coca', 12),
 (4, 'MON002', 10, '2 miếng Gà Sốt Cay', 'mon3.jpg', 90000.00, '2 miếng Gà Sốt Cay', '2 miếng Gà Sốt Cay', 5),
-(5, 'MON00145', 9, '1 Burger Tôm + 1 Khoai tây chiên vừa + 1 Nước ngọt', 'mon4.webp', 99000.00, '1 Burger Tôm + 1 Khoai tây chiên vừa + 1 Nước ngọt', '1 Burger Tôm + 1 Khoai tây chiên vừa + 1 Nước ngọt', 14);
+(5, 'MON00145', 9, '1 Burger Tôm + 1 Khoai tây chiên vừa + 1 Nước ngọt', 'mon4.webp', 99000.00, '1 Burger Tôm + 1 Khoai tây chiên vừa + 1 Nước ngọt', '1 Burger Tôm + 1 Khoai tây chiên vừa + 1 Nước ngọt', 14),
+(6, 'MON006', 8, 'Pizza Siêu Topping Xúc Xích Ý Truyền Thống', 'pz2.jpg', 205000.00, 'Pizza Siêu Topping Xúc Xích Ý Truyền Thống', '..', 12),
+(7, 'MON007', 8, 'Pizza Siêu Topping Bò Và Tôm Nướng Kiểu Mỹ', 'pz3.jpg', 245000.00, 'Pizza Siêu Topping Bò Và Tôm Nướng Kiểu Mỹ', 'vv', 14),
+(8, 'MON008', 7, '2 Viên Khoai Môn Kim Sa', 'tm1.jpg', 25000.00, '2 Viên Khoai Môn Kim Sa', '..', 5),
+(9, 'MON009', 7, '5 Viên Khoai Môn Kim Sa', 'tm2.jpg', 55000.00, '2 Viên Khoai Môn Kim Sa', '..', 8),
+(10, 'MON0010', 6, 'COCACOLA', 'tm3.jpg', 30000.00, '1 Ly Pepsi Lớn', '..', 50),
+(11, 'MON0011', 6, 'Trà Lipton', 'tm4.jpg', 24000.00, '1 ly trà đào', '..', 10),
+(12, 'MON0012', 6, 'PEPSI ZERO', 'tm5.jpg', 35000.00, '1 Ly Pepsi Không Đường (Tiêu Chuẩn)', '..', 33);
 
 -- --------------------------------------------------------
 
@@ -321,7 +332,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- AUTO_INCREMENT for table `news`
@@ -333,13 +344,19 @@ ALTER TABLE `news`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 
 --
 -- AUTO_INCREMENT for table `order_details`
 --
 ALTER TABLE `order_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+
+--
+-- AUTO_INCREMENT for table `products`
+--
+ALTER TABLE `products`
+  MODIFY `prd_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `stores`
