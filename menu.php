@@ -508,27 +508,57 @@ $category = isset($_GET['category']) ? (int)$_GET['category'] : 'all';
     <script>
     // Cập nhật số lượng giỏ từ DB
         async function updateCartCount() {
-            try {
-                const res = await fetch('cart_api.php?action=get');
-                if (!res.ok) throw new Error('Lỗi fetch giỏ: ' + res.status);
-                
-                const cart = await res.json();
-                console.log('Dữ liệu giỏ từ API:', cart);
-
-                // Kiểm tra cart có phải mảng không
-                if (!Array.isArray(cart)) {
-                    console.warn('API trả về không phải mảng:', cart);
-                    document.getElementById('cart-count').textContent = '0 món';
-                    return;
-                }
-
-                const totalQty = cart.reduce((sum, item) => sum + parseInt(item.quantity || 0), 0);
-                document.getElementById('cart-count').textContent = totalQty > 0 ? totalQty + ' món' : '0 món';
-            } catch (e) {
-                console.error('Lỗi updateCartCount:', e);
-                document.getElementById('cart-count').textContent = '0 món';
+    console.log('[DEBUG] Bắt đầu updateCartCount() - Thời gian:', new Date().toLocaleString());
+    
+    try {
+        // Cache buster mạnh hơn (timestamp + random)
+        const cacheBuster = Date.now() + '-' + Math.random().toString(36).substr(2, 5);
+        const url = `cart_api.php?action=get&nocache=${cacheBuster}`;
+        
+        console.log('[DEBUG] Fetch URL:', url);
+        
+        const res = await fetch(url, {
+            cache: 'no-store',           // Buộc không dùng cache
+            headers: {
+                'Cache-Control': 'no-cache'
             }
+        });
+        
+        console.log('[DEBUG] Status code từ API:', res.status);
+        console.log('[DEBUG] Headers từ response:', [...res.headers.entries()]);
+        
+        if (!res.ok) {
+            throw new Error('Lỗi fetch giỏ: ' + res.status);
         }
+        
+        const cart = await res.json();
+        
+        // In toàn bộ dữ liệu trả về để xem
+        console.log('[DEBUG] Dữ liệu giỏ hàng từ API (raw):', cart);
+        console.log('[DEBUG] Kiểu dữ liệu:', typeof cart);
+        console.log('[DEBUG] Là array?', Array.isArray(cart));
+        
+        if (!Array.isArray(cart)) {
+            console.warn('[DEBUG] API không trả về mảng, reset về 0');
+            document.getElementById('cart-count').textContent = '0 món';
+            return;
+        }
+        
+        const totalQty = cart.reduce((sum, item) => {
+            const qty = parseInt(item.quantity || 0);
+            console.log('[DEBUG] Item:', item.product_id, 'qty:', qty);
+            return sum + qty;
+        }, 0);
+        
+        console.log('[DEBUG] Tổng số lượng tính được:', totalQty);
+        document.getElementById('cart-count').textContent = 
+            totalQty > 0 ? totalQty + ' món' : '0 món';
+            
+    } catch (e) {
+        console.error('[DEBUG] LỖI updateCartCount:', e);
+        document.getElementById('cart-count').textContent = '0 món';
+    }
+}
 
         // Xử lý click giỏ hàng → hiện modal
         document.getElementById('cart-fixed').onclick = function() {
@@ -860,6 +890,23 @@ $category = isset($_GET['category']) ? (int)$_GET['category'] : 'all';
         }
         loadProducts(categoryFromUrl);
         updateCartCount();
+
+// Gọi lại khi trang load từ back/forward cache
+window.addEventListener('pageshow', function(event) {
+    if (event.persisted) {  // Trang load từ bfcache (back/forward)
+        console.log('Trang load từ cache → force update giỏ');
+        updateCartCount();
+    }
+});
+
+// Gọi lại khi focus tab (người dùng quay lại tab menu)
+window.addEventListener('focus', function() {
+    console.log('Tab được focus → update giỏ');
+    updateCartCount();
+});
+
+// Gọi lại sau 1 giây (phòng trường hợp load chậm)
+setTimeout(updateCartCount, 1000);
     </script>
 
 

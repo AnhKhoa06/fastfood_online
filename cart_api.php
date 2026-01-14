@@ -3,14 +3,35 @@ session_start();
 require_once 'admin/config/db.php';
 
 header('Content-Type: application/json');
-
+// Thêm ở đầu cart_api.php (sau header('Content-Type: application/json');)
+header("Cache-Control: no-cache, no-store, must-revalidate");
+header("Pragma: no-cache");
+header("Expires: 0");
 if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
     echo json_encode(['success' => false, 'message' => 'Vui lòng đăng nhập!']);
     exit;
 }
 
-// Lấy user_id (thay bằng cách lấy thực tế của bạn, ví dụ từ session)
-$user_id = $_SESSION['user_id'] ?? 0; // ← Sửa thành $_SESSION['id'] hoặc tương tự nếu bạn lưu khác
+// Lấy user_id từ username trong session (đồng bộ với checkout.php)
+$username = $_SESSION['username'] ?? '';
+if (empty($username)) {
+    echo json_encode(['success' => false, 'message' => 'Vui lòng đăng nhập!']);
+    exit;
+}
+
+$user_query = "SELECT id FROM users WHERE username = ?";
+$stmt_user = $connect->prepare($user_query);
+$stmt_user->bind_param("s", $username);
+$stmt_user->execute();
+$result_user = $stmt_user->get_result();
+$user_row = $result_user->fetch_assoc();
+$user_id = $user_row['id'] ?? 0;
+$stmt_user->close();
+
+if ($user_id == 0) {
+    echo json_encode(['success' => false, 'message' => 'Không tìm thấy user']);
+    exit;
+}
 
 // Lấy action từ GET hoặc POST
 $action = $_GET['action'] ?? $_POST['action'] ?? '';

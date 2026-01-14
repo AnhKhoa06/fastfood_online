@@ -8,6 +8,7 @@
     $query_category = mysqli_query($connect, $sql_category);
 
     if (isset($_POST['sbm'])) {
+        $product_code = trim($_POST['product_code']);
         $prd_name = trim($_POST['prd_name']);
         $price = $_POST['price'];
         $quantity = $_POST['quantity'];
@@ -26,6 +27,7 @@
 
         $sql = "UPDATE products SET 
                 category_id = $category_id,
+                product_code = '$product_code',
                 prd_name = '$prd_name',
                 image = '$image',
                 price = $price,
@@ -60,6 +62,10 @@
                 <div class="form-group">
                     <label>Tên món ăn</label>
                     <input type="text" name="prd_name" class="form-control" required value="<?php echo htmlspecialchars($row_up['prd_name']); ?>">
+                </div>
+                <div class="form-group">
+                    <label>Mã món ăn</label>
+                    <input type="text" name="product_code" class="form-control" required value="<?php echo htmlspecialchars($row_up['product_code'] ?? ''); ?>" maxlength="20">
                 </div>
                 <div class="form-group">
                     <label>Ảnh hiện tại</label><br>

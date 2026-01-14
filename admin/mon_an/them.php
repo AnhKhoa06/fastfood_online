@@ -3,6 +3,7 @@
     $query_category = mysqli_query($connect, $sql_category);
 
     if (isset($_POST['sbm'])) {
+        $product_code = trim($_POST['product_code']);
         $prd_name = trim($_POST['prd_name']);
         $price = $_POST['price'];
         $quantity = $_POST['quantity'];
@@ -16,9 +17,9 @@
         move_uploaded_file($image_tmp, 'img/' . $image);
 
         $sql = "INSERT INTO products 
-                (category_id, prd_name, image, price, description, additional_options, quantity)
+                (category_id, product_code, prd_name, image, price, description, additional_options, quantity)
                 VALUES 
-                ($category_id, '$prd_name', '$image', $price, '$description', '$additional_options', $quantity)";
+                ($category_id, '$product_code', '$prd_name', '$image', $price, '$description', '$additional_options', $quantity)";
 
         mysqli_query($connect, $sql);
         header('Location: index.php?page_layout=danhsach');
@@ -47,6 +48,11 @@
                 <div class="form-group">
                     <label>Tên món ăn</label>
                     <input type="text" name="prd_name" class="form-control" required>
+                </div>
+                <!-- THÊM MỚI: Mã món ăn -->
+                <div class="form-group">
+                    <label>Mã món ăn</label>
+                    <input type="text" name="product_code" class="form-control" required placeholder="Nhập mã duy nhất cho món" maxlength="20">
                 </div>
                 <div class="form-group">
                     <label>Ảnh món ăn</label>

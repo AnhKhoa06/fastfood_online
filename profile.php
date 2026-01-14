@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once 'admin/config/db.php'; // hoặc '../db.php' tùy vị trí
+require_once 'admin/config/db.php'; 
 
 // Kiểm tra đăng nhập
 if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
@@ -12,8 +12,9 @@ $mode = 'view'; // mặc định
 if (isset($_GET['mode'])) {
     if ($_GET['mode'] === 'edit') $mode = 'edit';
     if ($_GET['mode'] === 'address') $mode = 'address';
+    if ($_GET['mode'] === 'order') $mode = 'order';
+    if ($_GET['mode'] === 'order_details') $mode = 'order_details';
 }
-
 
 $username = htmlspecialchars($_SESSION['username']);
 $email = ''; // sẽ lấy từ DB
@@ -29,8 +30,6 @@ if ($stmt && $row = $stmt->fetch_assoc()) {
     $phone = 'Chưa cập nhật';
 }
 
-
-
 $address_db = ''; // địa chỉ từ DB
 $stmt = $connect->query("SELECT address FROM users WHERE username = '$username'");
 if ($stmt && $row = $stmt->fetch_assoc()) {
@@ -39,8 +38,6 @@ if ($stmt && $row = $stmt->fetch_assoc()) {
 
 ?>
 
-
-
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -48,12 +45,17 @@ if ($stmt && $row = $stmt->fetch_assoc()) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="assets/img/header/logo.jpg">
     <title>Phở Anh Hai | Tài khoản của tôi</title>
-    <link rel="stylesheet" href="assets/css/profile3.css"> <!-- File CSS riêng -->
+    <link rel="stylesheet" href="assets/css/profile5.css"> <!-- File CSS riêng -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     
 <body>
     <?php include_once 'components/header1.php'; ?>
+        <?php if (isset($_SESSION['order_success'])): ?>
+            <div style="background: #d4edda; color: #155724; padding: 15px; border-radius: 8px; margin: 20px auto; margin-top: 10px; text-align: center; font-weight: bold;">
+                <?php echo $_SESSION['order_success']; unset($_SESSION['order_success']); ?>
+            </div>
+        <?php endif; ?>
 
         <?php if (isset($_SESSION['update_success'])): ?>
             <div style="background: #d4edda; color: #155724; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
@@ -80,7 +82,9 @@ if ($stmt && $row = $stmt->fetch_assoc()) {
                 <li id="menu-manage" <?php echo ($mode === 'view' ? 'class="active"' : ''); ?>>
                     <a href="profile.php">Quản lý tài khoản</a>
                 </li>
-                <li><a href="#">Đơn hàng của tôi</a></li>
+                <li id="menu-order" <?php echo (in_array($mode, ['order', 'order_details']) ? 'class="active"' : ''); ?>>
+                    <a href="profile.php?mode=order">Quản lý đơn hàng</a>
+                </li>
                 <li id="menu-address" <?php echo ($mode === 'address' ? 'class="active"' : ''); ?>>
                     <a href="profile.php?mode=address">Địa chỉ giao hàng</a>
                 </li>
@@ -93,7 +97,7 @@ if ($stmt && $row = $stmt->fetch_assoc()) {
 
         <div class="profile-main">
             <!-- PHẦN HIỂN THỊ THÔNG TIN (MẶC ĐỊNH) -->
-            <div id="view-mode" style="<?php echo $mode === 'view' ? 'display: block;' : 'display: none;'; ?>">
+            <div id="view-mode" style="<?php echo $mode === 'view' ? 'display: block !important;' : 'display: none !important;'; ?>">
                 <h1 class="title-view">QUẢN LÝ TÀI KHOẢN</h1>
                 <p>Xin chào, <strong><?php echo $username; ?></strong>. Với trang này, bạn sẽ quản lý được tất cả thông tin tài khoản của mình.</p>
 
@@ -233,38 +237,14 @@ if ($stmt && $row = $stmt->fetch_assoc()) {
                                    value="<?php echo htmlspecialchars($old_address['phone'] ?? $phone); ?>" required>
                         </div>
 
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label class="form-label">Tỉnh / Thành phố *</label>
-                                <select id="province" class="form-control" required>
-                                    <option value="">-- Chọn Tỉnh/Thành phố --</option>
-                                </select>
-                            </div>
-                        
-                            <div class="form-group">
-                                <label class="form-label">Quận / Huyện *</label>
-                                <select id="district" class="form-control" required disabled>
-                                    <option value="">-- Chọn Quận/Huyện --</option>
-                                </select>
-                            </div>
-                        </div>
+                        <!-- Chỉ 1 ô input đơn giản -->
+                        <div class="form-group" style="position: relative;">
+                            <input type="text" name="address" id="address-input" placeholder="Nhập địa chỉ giao hàng" 
+                                value="<?php echo htmlspecialchars($address_db); ?>" required style="width: 100%; padding: 18px 20px; border-radius: 10px; border: 1px solid #ddd; font-size: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); outline: none;">
 
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label class="form-label">Phường / Thị trấn *</label>
-                                <select id="ward" class="form-control" required disabled>
-                                    <option value="">-- Chọn Phường/Thị trấn --</option>
-                                </select>
-                            </div>
-                        
-                            <div class="form-group full-width">
-                                <label class="form-label">Số nhà / đường</label>
-                                <input type="text" id="street" class="form-control1" placeholder="Nhập số nhà, tên đường">
-                            </div>
+                            <!-- Danh sách gợi ý - PHẢI có id="suggestions-list" -->
+                            <ul id="suggestions-list" class="suggestions-list" style="display: none; position: absolute; top: 100%; left: 0; right: 0; background: white; border: 1px solid #ddd; border-radius: 8px; margin-top: 4px; max-height: 200px; overflow-y: auto; z-index: 1000; list-style: none; padding: 0; box-shadow: 0 4px 12px rgba(0,0,0,0.15);"></ul>
                         </div>
-
-                        <!-- Hidden input để lưu địa chỉ đầy đủ -->
-                        <input type="hidden" name="address" id="full-address">
                         
                         <div class="form-buttons" style="margin-top: 30px; justify-content: flex-start;">
                             <a href="profile.php" class="btn-cancel">QUAY LẠI</a>
@@ -272,6 +252,282 @@ if ($stmt && $row = $stmt->fetch_assoc()) {
                         </div>
                     </form>
                 </div>
+            </div>
+
+            <!-- PHẦN QUẢN LÝ ĐƠN HÀNG (mode=order) -->
+            <div id="order-mode" style="<?php echo $mode === 'order' ? 'display: block;' : 'display: none;'; ?>">
+                <h1 class="title-view">QUẢN LÝ ĐƠN HÀNG</h1>
+                <p>Xem và quản lý tất cả đơn hàng của bạn.</p>
+
+                <div class="order-content">
+                    <h2 class="order-title">Danh sách đơn hàng</h2>
+
+                    <table class="order-table">
+                        <thead>
+                            <tr>
+                                <th>Mã đơn hàng</th>
+                                <th>Thời gian</th>
+                                <th>PTTT</th>
+                                <th>Trạng thái</th>
+                                <th>Tổng tiền</th>
+                                <th>Hành động</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            // Lấy user_id từ DB
+                            $user_query = "SELECT id FROM users WHERE username = ?";
+                            $stmt_user = $connect->prepare($user_query);
+                            $stmt_user->bind_param("s", $username);
+                            $stmt_user->execute();
+                            $result_user = $stmt_user->get_result();
+                            $user_row = $result_user->fetch_assoc();
+                            $user_id = $user_row['id'] ?? 0;
+                            $stmt_user->close();
+
+                            if ($user_id > 0) {
+                                // Fetch danh sách đơn hàng
+                                $query = "SELECT order_code, created_at, payment_method, status, total_amount 
+                                        FROM orders 
+                                        WHERE user_id = ? 
+                                        ORDER BY created_at DESC";
+                                $stmt = $connect->prepare($query);
+                                $stmt->bind_param("i", $user_id);
+                                $stmt->execute();
+                                $result = $stmt->get_result();
+
+                                if ($result->num_rows > 0) {
+                                    while ($order = $result->fetch_assoc()) {
+                                        $payment_text = ($order['payment_method'] === 'cod') ? 'Tiền mặt (COD)' : 'VNPay';
+                                        $status_class = strtolower(str_replace(' ', '-', $order['status']));
+                                        $status_text = htmlspecialchars($order['status']);
+                                        ?>
+                                        <tr data-order-code="<?php echo $order['order_code']; ?>">
+                                            <td><?php echo htmlspecialchars($order['order_code']); ?></td>
+                                            <td><?php echo date('d-m-Y / H:i', strtotime($order['created_at'])); ?></td>
+                                            <td><?php echo $payment_text; ?></td>
+                                            <td><span class="status-<?php echo $status_class; ?>"><?php echo $status_text; ?></span></td>
+                                            <td><?php echo number_format($order['total_amount'], 0, ',', '.'); ?> đ</td>
+                                            <td>
+                                                <?php if ($order['status'] === 'Chờ xác nhận'): ?>
+                                                    <button class="action-btn cancel-order-btn" data-order-code="<?php echo $order['order_code']; ?>">Hủy đơn</button>
+                                                <?php endif; ?>
+                                                <?php if ($order['status'] === 'Đang xử lý'): ?>
+                                                    <button class="action-btn receive-order-btn" data-order-code="<?php echo $order['order_code']; ?>">Nhận hàng</button>
+                                                <?php endif; ?>
+                                                <button class="action-btn view-btn" data-order-code="<?php echo $order['order_code']; ?>">Xem chi tiết</button>
+                                            </td>
+                                        </tr>
+                                        <?php
+                                    }
+                                } else {
+                                    echo '<tr><td colspan="6" style="text-align:center; color:#999; padding:30px;">Bạn chưa có đơn hàng nào.</td></tr>';
+                                }
+                                $stmt->close();
+                            } else {
+                                echo '<tr><td colspan="6" style="text-align:center; color:red; padding:30px;">Lỗi: Không tìm thấy tài khoản.</td></tr>';
+                            }
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <script>
+                // Xử lý nút Hủy đơn (người dùng)
+                document.addEventListener('DOMContentLoaded', function() {
+                    const cancelButtons = document.querySelectorAll('.cancel-order-btn');
+                    cancelButtons.forEach(button => {
+                        button.addEventListener('click', function() {
+                            const orderCode = this.getAttribute('data-order-code');
+                            if (confirm('Bạn có chắc chắn muốn hủy đơn hàng ' + orderCode + '?')) {
+                                fetch('admin/update_status.php', {
+                                    method: 'POST',
+                                    headers: { 'Content-Type': 'application/json' },
+                                    body: JSON.stringify({ order_code: orderCode, status: 'Hủy đơn' })
+                                })
+                                .then(response => response.json())
+                                .then(data => {
+                                    if (data.success) {
+                                        alert('Đã hủy đơn hàng ' + orderCode);
+                                        const row = this.closest('tr');
+                                        row.querySelector('td:nth-child(4) span').className = 'status-hủy-đơn';
+                                        row.querySelector('td:nth-child(4) span').textContent = 'Hủy đơn';
+                                        this.remove(); // Xóa nút Hủy
+                                    } else {
+                                        alert(data.message || 'Lỗi khi hủy đơn hàng');
+                                    }
+                                })
+                                .catch(error => alert('Lỗi: ' + error));
+                            }
+                        });
+                    });
+
+                    // Xử lý nút Nhận hàng (người dùng)
+                    const receiveButtons = document.querySelectorAll('.receive-order-btn');
+                    receiveButtons.forEach(button => {
+                        button.addEventListener('click', function() {
+                            const orderCode = this.getAttribute('data-order-code');
+                            if (confirm('Bạn đã nhận được hàng ' + orderCode + '?')) {
+                                fetch('admin/update_status.php', {
+                                    method: 'POST',
+                                    headers: { 'Content-Type': 'application/json' },
+                                    body: JSON.stringify({ order_code: orderCode, status: 'Đã giao' })
+                                })
+                                .then(response => response.json())
+                                .then(data => {
+                                    if (data.success) {
+                                        alert('Đã xác nhận nhận hàng ' + orderCode);
+                                        const row = this.closest('tr');
+                                        row.querySelector('td:nth-child(4) span').className = 'status-đã-giao';
+                                        row.querySelector('td:nth-child(4) span').textContent = 'Đã giao';
+                                        this.remove(); // Xóa nút Nhận hàng
+                                    } else {
+                                        alert(data.message || 'Lỗi khi xác nhận nhận hàng');
+                                    }
+                                })
+                                .catch(error => alert('Lỗi: ' + error));
+                            }
+                        });
+                    });
+                });
+            </script>
+
+            <!-- PHẦN CHI TIẾT ĐƠN HÀNG (mode=order_details) -->
+            <div id="order-detail-mode" style="<?php echo $mode === 'order_details' ? 'display: block;' : 'display: none;'; ?>">
+                <?php
+                if ($mode === 'order_details' && isset($_GET['code'])) {
+                    $order_code = $_GET['code'];
+
+                    // Lấy thông tin đơn hàng từ orders
+                    $query_order = "SELECT o.*, u.username, u.phone, u.address 
+                                    FROM orders o 
+                                    LEFT JOIN users u ON o.user_id = u.id 
+                                    WHERE o.order_code = ? AND o.user_id = ?";
+                    $stmt_order = $connect->prepare($query_order);
+                    $stmt_order->bind_param("si", $order_code, $user_id); // $user_id lấy từ phần trên
+                    $stmt_order->execute();
+                    $result_order = $stmt_order->get_result();
+                    $order = $result_order->fetch_assoc();
+                    $stmt_order->close();
+
+                    if ($order) {
+                        $payment_text = ($order['payment_method'] === 'cod') ? 'Tiền mặt (COD)' : 'VNPay';
+                        $total_amount = number_format($order['total_amount'], 0, ',', '.');
+                        ?>
+                        <div class="order-detail-content">
+                            <div class="order-detail-header">
+                                <h2>Chi Tiết Đơn Hàng #<?php echo htmlspecialchars($order['order_code']); ?></h2>
+                                <a href="profile.php?mode=order" class="back-button"><i class="bi bi-arrow-left"></i> Quay lại danh sách đơn hàng</a>
+                            </div>
+
+                            <div class="order-info-container">
+                                <div class="info-section">
+                                    <h3>Thông Tin Tài Khoản</h3>
+                                    <div class="info-content">
+                                        <div class="info-row">
+                                            <div class="info-label">Tên</div>
+                                            <div class="info-value"><?php echo htmlspecialchars($order['username']); ?></div>
+                                        </div>
+                                        <div class="info-row">
+                                            <div class="info-label">Số Điện Thoại</div>
+                                            <div class="info-value"><?php echo htmlspecialchars($order['phone']); ?></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="info-section">
+                                    <h3>Thông Tin Giao Hàng</h3>
+                                    <div class="info-content">
+                                        <div class="info-row">
+                                            <div class="info-label">Địa Chỉ</div>
+                                            <div class="info-value"><?php echo htmlspecialchars($order['address']); ?></div>
+                                        </div>
+                                        <div class="info-row">
+                                            <div class="info-label">Phương Thức</div>
+                                            <div class="info-value">
+                                                <?php 
+                                                $delivery_text = ($order['delivery_mode'] === 'delivery') ? 'Giao hàng tận nơi' : 'Hẹn lấy tại cửa hàng';
+                                                echo htmlspecialchars($delivery_text);
+                                                ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="order-details-section">
+                                <h3>Thông Tin Đơn Hàng</h3>
+                                <div class="info-content">
+                                    <div class="info-row1">
+                                        <div class="info-label">Mã Đơn hàng</div>
+                                        <div class="info-value"><?php echo htmlspecialchars($order['order_code']); ?></div>
+                                    </div>
+                                    <div class="info-row1">
+                                        <div class="info-label">Phương Thức Thanh Toán</div>
+                                        <div class="info-value"><?php echo $payment_text; ?></div>
+                                    </div>
+                                    <div class="info-row1">
+                                        <div class="info-label">Tổng tiền</div>
+                                        <div class="info-value total-price"><?php echo $total_amount; ?> đ</div>
+                                    </div>
+                                    <!-- Có thể thêm các trường khác nếu cần -->
+                                </div>
+                            </div>
+
+                            <div class="product-list-section">
+                                <h3>Danh sách món ăn</h3>
+                                <table class="product-table">
+                                    <thead>
+                                        <tr>
+                                            <th>STT</th>
+                                            <th>Mã Món</th>
+                                            <th>Tên Món</th>
+                                            <th>Số Lượng</th>
+                                            <th>Đơn Giá</th>
+                                            <th>Thành Tiền</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        $query_details = "SELECT od.*, p.product_code, p.prd_name 
+                                                        FROM order_details od 
+                                                        LEFT JOIN products p ON od.product_id = p.prd_id 
+                                                        WHERE od.order_id = ?";
+                                        $stmt_details = $connect->prepare($query_details);
+                                        $stmt_details->bind_param("i", $order['id']);
+                                        $stmt_details->execute();
+                                        $result_details = $stmt_details->get_result();
+                                        $stt = 1;
+                                        $total_items = 0;
+                                        while ($detail = $result_details->fetch_assoc()) {
+                                            $subtotal = $detail['quantity'] * $detail['unit_price'];
+                                            $total_items += $detail['quantity'];
+                                            ?>
+                                            <tr>
+                                                <td><?php echo $stt++; ?></td>
+                                                <td><?php echo htmlspecialchars($detail['product_code']); ?></td>
+                                                <td><?php echo htmlspecialchars($detail['product_name'] ?: $detail['product_name']); ?></td>
+                                                <td><?php echo $detail['quantity']; ?></td>
+                                                <td><?php echo number_format($detail['unit_price'], 0, ',', '.'); ?> đ</td>
+                                                <td><?php echo number_format($subtotal, 0, ',', '.'); ?> đ</td>
+                                            </tr>
+                                            <?php
+                                        }
+                                        $stmt_details->close();
+                                        ?>
+                                    </tbody>
+                                </table>
+                                <p style="text-align:right; font-weight:bold; margin-top:10px;">
+                                    Tổng số món: <?php echo $total_items; ?>
+                                </p>
+                            </div>
+                        </div>
+                        <?php
+                    } else {
+                        echo '<p style="text-align:center; color:red; padding:30px;">Không tìm thấy đơn hàng #' . htmlspecialchars($order_code) . '.</p>';
+                    }
+                }
+                ?>
             </div>
 
         </div>
@@ -282,169 +538,90 @@ if ($stmt && $row = $stmt->fetch_assoc()) {
 </html>
 
 <script>
-// Dữ liệu địa chỉ
-const addressData = {
-    provinces: [],
-    districts: {},
-    wards: {}
-};
-
-fetch('https://provinces.open-api.vn/api/?depth=3')
-    .then(response => response.json())
-    .then(data => {
-        // Xử lý dữ liệu
-        addressData.provinces = data.map(p => ({ code: p.code, name: p.name }));
-
-        data.forEach(province => {
-            addressData.districts[province.code] = province.districts.map(d => ({
-                code: d.code,
-                name: d.name
-            }));
-
-            province.districts.forEach(district => {
-                addressData.wards[district.code] = district.wards.map(w => ({
-                    code: w.code,
-                    name: w.name
-                }));
-            });
-        });
-
-        // Load tỉnh
-        const provinceSelect = document.getElementById('province');
-        provinceSelect.innerHTML = '<option value="">-- Chọn Tỉnh/Thành phố --</option>';
-        addressData.provinces.forEach(p => {
-            const option = document.createElement('option');
-            option.value = p.code;
-            option.textContent = p.name;
-            provinceSelect.appendChild(option);
-        });
-    })
-    .catch(err => {
-        console.error('Lỗi load dữ liệu địa chỉ:', err);
-        alert('Không thể tải dữ liệu địa chỉ. Vui lòng kiểm tra kết nối mạng.');
-    });
-
-// Event khi chọn tỉnh
-document.getElementById('province').addEventListener('change', function() {
-    const provinceCode = this.value;
-    const districtSelect = document.getElementById('district');
-    const wardSelect = document.getElementById('ward');
-
-    districtSelect.innerHTML = '<option value="">-- Chọn Quận/Huyện --</option>';
-    wardSelect.innerHTML = '<option value="">-- Chọn Phường/Thị trấn --</option>';
-    wardSelect.disabled = true;
-
-    if (!provinceCode) {
-        districtSelect.disabled = true;
-        return;
-    }
-
-    const districts = addressData.districts[provinceCode] || [];
-    districts.forEach(d => {
-        const option = document.createElement('option');
-        option.value = d.code;
-        option.textContent = d.name;
-        districtSelect.appendChild(option);
-    });
-
-    districtSelect.disabled = false;
-});
-
-// Event khi chọn quận
-document.getElementById('district').addEventListener('change', function() {
-    const districtCode = this.value;
-    const wardSelect = document.getElementById('ward');
-
-    wardSelect.innerHTML = '<option value="">-- Chọn Phường/Thị trấn --</option>';
-
-    if (!districtCode) {
-        wardSelect.disabled = true;
-        return;
-    }
-
-    const wards = addressData.wards[districtCode] || [];
-    wards.forEach(w => {
-        const option = document.createElement('option');
-        option.value = w.code;
-        option.textContent = w.name;
-        wardSelect.appendChild(option);
-    });
-
-    wardSelect.disabled = false;
-});
-
-// Khi submit form → gộp địa chỉ đầy đủ
-document.querySelector('.address-form').addEventListener('submit', function() {
-    const province = document.getElementById('province').selectedOptions[0]?.textContent || '';
-    const district = document.getElementById('district').selectedOptions[0]?.textContent || '';
-    const ward = document.getElementById('ward').selectedOptions[0]?.textContent || '';
-    const street = document.getElementById('street').value.trim();
-
-    const fullAddress = [street, ward, district, province].filter(Boolean).join(', ');
-    document.getElementById('full-address').value = fullAddress;
-});
-
-// Tự động điền địa chỉ từ DB vào 4 ô khi vào phần chỉnh sửa
 document.addEventListener('DOMContentLoaded', function() {
-    const fullAddress = "<?php echo addslashes($address_db); ?>".trim();
-    if (!fullAddress) return;
+    // Đợi DOM load xong mới lấy element
+    const input = document.getElementById('address-input');
+    const suggestionsList = document.getElementById('suggestions-list');
+    let debounceTimer;
 
-    // Tách địa chỉ: "123 Nguyễn Trãi, Phường Bến Thành, Quận 1, TP. Hồ Chí Minh (Ghi chú: ...)"
-    let cleanAddress = fullAddress.replace(/\s*\(Ghi chú:.*\)$/, '').trim(); // bỏ ghi chú nếu có
-    const parts = cleanAddress.split(', ').reverse(); // đảo ngược để dễ lấy tỉnh trước
+    // Chỉ chạy nếu đang ở mode address (có input + ul)
+    if (!input || !suggestionsList) {
+        console.log('Không tìm thấy input hoặc suggestions-list → script gợi ý không chạy');
+        return;
+    }
 
-    if (parts.length < 4) return;
-
-    const provinceName = parts[0].trim(); // tỉnh
-    const districtName = parts[1].trim(); // quận
-    const wardName = parts[2].trim(); // phường
-    const street = parts.slice(3).reverse().join(', ').trim(); // số nhà + đường
-
-    // Điền số nhà ngay
-    document.getElementById('street').value = street;
-
-    // Chờ dữ liệu tỉnh load xong
-    const checkData = setInterval(() => {
-        if (addressData.provinces.length > 0) {
-            clearInterval(checkData);
-
-            // Chọn tỉnh
-            const provinceSelect = document.getElementById('province');
-            const provinceOption = Array.from(provinceSelect.options).find(opt => opt.textContent.trim() === provinceName);
-            if (provinceOption) {
-                provinceSelect.value = provinceOption.value;
-                provinceSelect.dispatchEvent(new Event('change')); // trigger load quận
-
-                // Chờ quận load
-                setTimeout(() => {
-                    const districtSelect = document.getElementById('district');
-                    const districtOption = Array.from(districtSelect.options).find(opt => opt.textContent.trim() === districtName);
-                    if (districtOption) {
-                        districtSelect.value = districtOption.value;
-                        districtSelect.dispatchEvent(new Event('change')); // trigger load phường
-
-                        // Chờ phường load
-                        setTimeout(() => {
-                            const wardSelect = document.getElementById('ward');
-                            const wardOption = Array.from(wardSelect.options).find(opt => opt.textContent.trim() === wardName);
-                            if (wardOption) {
-                                wardSelect.value = wardOption.value;
-                            }
-                        }, 400);
-                    }
-                }, 400);
+    input.addEventListener('input', function() {
+        clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(() => {
+            const query = input.value.trim();
+            
+            if (query.length < 3) {
+                suggestionsList.style.display = 'none';
+                suggestionsList.innerHTML = '';
+                return;
             }
-        }
-    }, 100);
-});
 
+            const url = `nominatim_proxy.php?q=${encodeURIComponent(query)}`;
+
+            fetch(url)
+                .then(response => {
+                    if (!response.ok) throw new Error('Proxy error');
+                    return response.json();
+                })
+                .then(data => {
+                    suggestionsList.innerHTML = '';
+                    if (data && data.length > 0) {
+                        data.forEach(item => {
+                            const address = item.address || {};
+                            let label = [
+                                address.house_number ? address.house_number + ' ' : '',
+                                address.road || address.pedestrian || '',
+                                address.suburb || address.village || '',
+                                address.city || address.town || address.county || '',
+                                address.state || '',
+                                address.postcode || ''
+                            ].filter(Boolean).join(', ');
+
+                            const li = document.createElement('li');
+                            li.textContent = label || item.display_name;
+                            li.style.padding = '10px 14px';
+                            li.style.cursor = 'pointer';
+                            li.addEventListener('click', () => {
+                                input.value = label || item.display_name;
+                                suggestionsList.style.display = 'none';
+                            });
+                            suggestionsList.appendChild(li);
+                        });
+                        suggestionsList.style.display = 'block';
+                    } else {
+                        suggestionsList.innerHTML = '<li class="no-result">Không tìm thấy kết quả phù hợp</li>';
+                        suggestionsList.style.display = 'block';
+                    }
+                })
+                .catch(error => {
+                    console.error('Lỗi fetch Nominatim:', error);
+                    suggestionsList.innerHTML = '<li class="no-result">Lỗi kết nối</li>';
+                    suggestionsList.style.display = 'block';
+                });
+        }, 600);
+    });
+
+    // Ẩn dropdown khi click ngoài
+    document.addEventListener('click', function(e) {
+        if (!input.contains(e.target) && !suggestionsList.contains(e.target)) {
+            suggestionsList.style.display = 'none';
+        }
+    });
+});
 </script>
+
 
 
 <!---------------------------------------->
 
 
 <script>
+// Giữ nguyên hàm cũ cho edit/view
 function switchToEditMode() {
     document.getElementById('view-mode').style.display = 'none';
     document.getElementById('edit-mode').style.display = 'block';
@@ -463,13 +640,58 @@ function switchToViewMode() {
     document.getElementById('menu-info').classList.remove('active');
 }
 
-// Tick thay đổi mật khẩu
+// BỔ SUNG: Hàm chuyển sang address-mode
+function switchToAddressMode() {
+    document.getElementById('view-mode').style.display = 'none';
+    document.getElementById('edit-mode').style.display = 'none';
+    document.getElementById('order-mode').style.display = 'none';
+    document.getElementById('address-mode').style.display = 'block';
+
+    // Active sidebar
+    document.querySelectorAll('.sidebar-menu li').forEach(li => li.classList.remove('active'));
+    document.getElementById('menu-address').classList.add('active');
+}
+
+// BỔ SUNG: Hàm chuyển sang order-mode
+function switchToOrderMode() {
+    document.getElementById('view-mode').style.display = 'none';
+    document.getElementById('edit-mode').style.display = 'none';
+    document.getElementById('address-mode').style.display = 'none';
+    document.getElementById('order-mode').style.display = 'block';
+
+    // Active sidebar
+    document.querySelectorAll('.sidebar-menu li').forEach(li => li.classList.remove('active'));
+    document.getElementById('menu-order').classList.add('active');
+}
+
+// Tick thay đổi mật khẩu (giữ nguyên)
 document.getElementById('change-password-toggle').addEventListener('change', function() {
     document.getElementById('password-fields').style.display = this.checked ? 'block' : 'none';
 });
 
-// Tự động hiển thị 2 ô mật khẩu nếu checkbox được checked từ server
+// Tự động chuyển mode khi load trang dựa trên URL ?mode=...
 document.addEventListener('DOMContentLoaded', function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const currentMode = urlParams.get('mode') || 'view'; // mặc định view
+
+    // Chuyển mode dựa trên URL
+    if (currentMode === 'edit') {
+        switchToEditMode();
+    } else if (currentMode === 'address') {
+        switchToAddressMode();
+    } else if (currentMode === 'order') {
+        switchToOrderMode();
+    } else if (currentMode === 'order_details') {
+        // BỔ SUNG: xử lý order_details (giống order-mode nhưng hiện chi tiết)
+        switchToOrderMode(); // giữ active sidebar ở menu-order
+        // Ẩn order-mode, hiện order-detail-mode
+        document.getElementById('order-mode').style.display = 'none';
+        document.getElementById('order-detail-mode').style.display = 'block';
+    } else {
+        switchToViewMode(); // mặc định view
+    }
+
+    // Giữ logic checkbox mật khẩu
     const toggle = document.getElementById('change-password-toggle');
     const fields = document.getElementById('password-fields');
     
@@ -477,6 +699,27 @@ document.addEventListener('DOMContentLoaded', function() {
         if (toggle.checked) {
             fields.style.display = 'block';
         }
+    }
+});
+
+// BỔ SUNG: Xử lý nút "Xem chi tiết" trong mode order
+document.addEventListener('DOMContentLoaded', function() {
+    const viewButtons = document.querySelectorAll('.view-btn');
+    viewButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const orderCode = this.getAttribute('data-order-code');
+            // Reload trang với mode=order_details và code đơn hàng
+            window.location.href = 'profile.php?mode=order_details&code=' + orderCode;
+        });
+    });
+
+    // Nút "Quay lại danh sách đơn hàng" trong chi tiết
+    const backButton = document.querySelector('.back-button');
+    if (backButton) {
+        backButton.addEventListener('click', function() {
+            // Reload trang về mode=order
+            window.location.href = 'profile.php?mode=order';
+        });
     }
 });
 </script>

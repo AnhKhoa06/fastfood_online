@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th1 13, 2026 lúc 03:44 PM
--- Phiên bản máy phục vụ: 10.4.32-MariaDB
--- Phiên bản PHP: 8.2.12
+-- Host: 127.0.0.1
+-- Generation Time: Jan 14, 2026 at 12:18 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Cơ sở dữ liệu: `fastfood`
+-- Database: `fastfood`
 --
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `banners`
+-- Table structure for table `banners`
 --
 
 CREATE TABLE `banners` (
@@ -34,7 +34,7 @@ CREATE TABLE `banners` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `banners`
+-- Dumping data for table `banners`
 --
 
 INSERT INTO `banners` (`id`, `image`, `created_at`) VALUES
@@ -50,7 +50,7 @@ INSERT INTO `banners` (`id`, `image`, `created_at`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `cart`
+-- Table structure for table `cart`
 --
 
 CREATE TABLE `cart` (
@@ -63,17 +63,18 @@ CREATE TABLE `cart` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `cart`
+-- Dumping data for table `cart`
 --
 
 INSERT INTO `cart` (`cart_id`, `user_id`, `product_id`, `quantity`, `created_at`, `updated_at`) VALUES
-(10, 10, 2, 2, '2026-01-13 16:27:02', '2026-01-13 21:42:39'),
-(12, 10, 3, 2, '2026-01-13 18:05:52', '2026-01-13 21:40:56');
+(24, 6, 3, 1, '2026-01-14 13:50:35', '2026-01-14 13:50:35'),
+(36, 10, 4, 1, '2026-01-14 18:06:05', '2026-01-14 18:06:05'),
+(44, 1, 3, 1, '2026-01-14 18:17:03', '2026-01-14 18:17:03');
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `categories`
+-- Table structure for table `categories`
 --
 
 CREATE TABLE `categories` (
@@ -84,7 +85,7 @@ CREATE TABLE `categories` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `categories`
+-- Dumping data for table `categories`
 --
 
 INSERT INTO `categories` (`category_id`, `category_name`, `image`, `child_image`) VALUES
@@ -100,7 +101,7 @@ INSERT INTO `categories` (`category_id`, `category_name`, `image`, `child_image`
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `news`
+-- Table structure for table `news`
 --
 
 CREATE TABLE `news` (
@@ -113,7 +114,7 @@ CREATE TABLE `news` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `news`
+-- Dumping data for table `news`
 --
 
 INSERT INTO `news` (`news_id`, `image`, `category`, `title`, `content`, `created_at`) VALUES
@@ -125,11 +126,64 @@ INSERT INTO `news` (`news_id`, `image`, `category`, `title`, `content`, `created
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `products`
+-- Table structure for table `orders`
+--
+
+CREATE TABLE `orders` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `order_code` varchar(20) NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
+  `payment_method` varchar(50) NOT NULL,
+  `status` varchar(50) NOT NULL DEFAULT 'Chờ xác nhận',
+  `total_amount` decimal(15,2) NOT NULL,
+  `delivery_mode` enum('delivery','pickup') NOT NULL DEFAULT 'delivery'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`id`, `user_id`, `order_code`, `created_at`, `payment_method`, `status`, `total_amount`, `delivery_mode`) VALUES
+(59, 1, 'DH724727259', '2026-01-14 18:15:55', 'cod', 'Chờ xác nhận', 165000.00, 'delivery'),
+(60, 1, 'DH159557560', '2026-01-14 18:16:08', 'cod', 'Chờ xác nhận', 65000.00, 'delivery'),
+(61, 1, 'DH323163043', '2026-01-14 18:17:14', 'cod', 'Đã giao', 198000.00, 'delivery');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `order_details`
+--
+
+CREATE TABLE `order_details` (
+  `id` int(11) NOT NULL,
+  `order_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `product_code` varchar(50) NOT NULL,
+  `product_name` varchar(255) NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `unit_price` decimal(15,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `order_details`
+--
+
+INSERT INTO `order_details` (`id`, `order_id`, `product_id`, `product_code`, `product_name`, `quantity`, `unit_price`) VALUES
+(42, 59, 4, 'MON002', '2 miếng Gà Sốt Cay', 1, 90000.00),
+(43, 59, 3, 'MON003', '1 Mì Ý Jolly vừa + 1 Gà Giòn Vui Vẻ + 1 Khoai tây chiên vừa + 1 Nước ngọt', 1, 75000.00),
+(44, 60, 2, 'MON004', '2 MIẾNG GÀ GIÒN VUI VẺ', 1, 65000.00),
+(45, 61, 5, 'MON00145', '1 Burger Tôm + 1 Khoai tây chiên vừa + 1 Nước ngọt', 2, 99000.00);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `products`
 --
 
 CREATE TABLE `products` (
   `prd_id` int(11) NOT NULL,
+  `product_code` varchar(20) NOT NULL DEFAULT '',
   `category_id` int(10) UNSIGNED NOT NULL,
   `prd_name` varchar(255) NOT NULL,
   `image` varchar(255) NOT NULL,
@@ -140,19 +194,19 @@ CREATE TABLE `products` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `products`
+-- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`prd_id`, `category_id`, `prd_name`, `image`, `price`, `description`, `additional_options`, `quantity`) VALUES
-(2, 12, '2 MIẾNG GÀ GIÒN VUI VẺ', 'mon1.webp', 65000.00, '2 miếng gà và tương ớt', 'coca', 10),
-(3, 11, '1 Mì Ý Jolly vừa + 1 Gà Giòn Vui Vẻ + 1 Khoai tây chiên vừa + 1 Nước ngọt', 'mon2.jpg', 75000.00, '1 Mì Ý Jolly vừa + 1 Gà Giòn Vui Vẻ + 1 Khoai tây chiên vừa + 1 Nước ngọt', 'nước coca', 12),
-(4, 10, '2 miếng Gà Sốt Cay', 'mon3.jpg', 90000.00, '2 miếng Gà Sốt Cay', '2 miếng Gà Sốt Cay', 5),
-(5, 9, '1 Burger Tôm + 1 Khoai tây chiên vừa + 1 Nước ngọt', 'mon4.webp', 99000.00, '1 Burger Tôm + 1 Khoai tây chiên vừa + 1 Nước ngọt', '1 Burger Tôm + 1 Khoai tây chiên vừa + 1 Nước ngọt', 14);
+INSERT INTO `products` (`prd_id`, `product_code`, `category_id`, `prd_name`, `image`, `price`, `description`, `additional_options`, `quantity`) VALUES
+(2, 'MON004', 12, '2 MIẾNG GÀ GIÒN VUI VẺ', 'mon1.webp', 65000.00, '2 miếng gà và tương ớt', 'coca', 10),
+(3, 'MON003', 11, '1 Mì Ý Jolly vừa + 1 Gà Giòn Vui Vẻ + 1 Khoai tây chiên vừa + 1 Nước ngọt', 'mon2.jpg', 75000.00, '1 Mì Ý Jolly vừa + 1 Gà Giòn Vui Vẻ + 1 Khoai tây chiên vừa + 1 Nước ngọt', 'nước coca', 12),
+(4, 'MON002', 10, '2 miếng Gà Sốt Cay', 'mon3.jpg', 90000.00, '2 miếng Gà Sốt Cay', '2 miếng Gà Sốt Cay', 5),
+(5, 'MON00145', 9, '1 Burger Tôm + 1 Khoai tây chiên vừa + 1 Nước ngọt', 'mon4.webp', 99000.00, '1 Burger Tôm + 1 Khoai tây chiên vừa + 1 Nước ngọt', '1 Burger Tôm + 1 Khoai tây chiên vừa + 1 Nước ngọt', 14);
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `stores`
+-- Table structure for table `stores`
 --
 
 CREATE TABLE `stores` (
@@ -165,7 +219,7 @@ CREATE TABLE `stores` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `stores`
+-- Dumping data for table `stores`
 --
 
 INSERT INTO `stores` (`id`, `name`, `address`, `phone`, `opening_hours`, `status`) VALUES
@@ -177,7 +231,7 @@ INSERT INTO `stores` (`id`, `name`, `address`, `phone`, `opening_hours`, `status
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `users`
+-- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
@@ -195,11 +249,11 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `users`
+-- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `username`, `name`, `email`, `phone`, `address`, `password`, `role`, `status`, `is_admin`, `created_at`) VALUES
-(1, 'admin', NULL, 'admin@gmail.com', '01122334455', 'Nguyễn Thị Định, Nguyễn Văn Cừ, Phường Quy Nhơn Nam, Tỉnh Gia Lai, 55113', 'e10adc3949ba59abbe56e057f20f883e', 'admin', 'active', 1, '2025-12-11 16:59:45'),
+(1, 'admin', NULL, 'admin@gmail.com', '01122334455', 'Ngô Mây, Ngô Mây, Phường Quy Nhơn Nam, Tỉnh Gia Lai, 55500', 'e10adc3949ba59abbe56e057f20f883e', 'admin', 'active', 1, '2025-12-11 16:59:45'),
 (4, 'khoadzvcl', NULL, 'anhkhoa2406@gmail.com', '0357937048', NULL, 'e10adc3949ba59abbe56e057f20f883e', 'user', 'active', 0, '2025-12-11 17:49:23'),
 (5, 'khoapro2k55', NULL, 'anhkhoale1998@gmail.com', '01122334455', NULL, 'e10adc3949ba59abbe56e057f20f883e', 'user', 'active', 0, '2025-12-11 17:51:53'),
 (6, 'Anh Khoa', NULL, 'khoadeptrai2025@gmail.com', '0999888777', '237 Thanh Niên, Phường Quang Trung, Thành phố Quy Nhơn, Tỉnh Bình Định', 'fcea920f7412b5da7be0cf42b8c93759', 'user', 'active', 0, '2025-12-11 18:10:59'),
@@ -207,30 +261,52 @@ INSERT INTO `users` (`id`, `username`, `name`, `email`, `phone`, `address`, `pas
 (10, 'naovotrong', NULL, 'skajbdkasbdkjbasdkjb@gmail.com', '54151541', 'Nguyễn Thị Định, Nguyễn Văn Cừ, Phường Quy Nhơn Nam, Tỉnh Gia Lai, 55113', '202cb962ac59075b964b07152d234b70', 'user', 'active', 0, '2026-01-13 09:46:07');
 
 --
--- Chỉ mục cho các bảng đã đổ
+-- Indexes for dumped tables
 --
 
 --
--- Chỉ mục cho bảng `cart`
+-- Indexes for table `cart`
 --
 ALTER TABLE `cart`
   ADD PRIMARY KEY (`cart_id`),
   ADD UNIQUE KEY `unique_cart_item` (`user_id`,`product_id`);
 
 --
--- Chỉ mục cho bảng `news`
+-- Indexes for table `news`
 --
 ALTER TABLE `news`
   ADD PRIMARY KEY (`news_id`);
 
 --
--- Chỉ mục cho bảng `stores`
+-- Indexes for table `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `order_code` (`order_code`),
+  ADD KEY `user_id` (`user_id`);
+
+--
+-- Indexes for table `order_details`
+--
+ALTER TABLE `order_details`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `order_id` (`order_id`),
+  ADD KEY `product_id` (`product_id`);
+
+--
+-- Indexes for table `products`
+--
+ALTER TABLE `products`
+  ADD PRIMARY KEY (`prd_id`);
+
+--
+-- Indexes for table `stores`
 --
 ALTER TABLE `stores`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `users`
+-- Indexes for table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
@@ -238,32 +314,61 @@ ALTER TABLE `users`
   ADD UNIQUE KEY `email` (`email`);
 
 --
--- AUTO_INCREMENT cho các bảng đã đổ
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT cho bảng `cart`
+-- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
--- AUTO_INCREMENT cho bảng `news`
+-- AUTO_INCREMENT for table `news`
 --
 ALTER TABLE `news`
   MODIFY `news_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
--- AUTO_INCREMENT cho bảng `stores`
+-- AUTO_INCREMENT for table `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
+
+--
+-- AUTO_INCREMENT for table `order_details`
+--
+ALTER TABLE `order_details`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+
+--
+-- AUTO_INCREMENT for table `stores`
 --
 ALTER TABLE `stores`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT cho bảng `users`
+-- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `orders`
+--
+ALTER TABLE `orders`
+  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `order_details`
+--
+ALTER TABLE `order_details`
+  ADD CONSTRAINT `fk_order_details_order_id` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_order_details_product_id` FOREIGN KEY (`product_id`) REFERENCES `products` (`prd_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

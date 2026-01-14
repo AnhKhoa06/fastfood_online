@@ -9,8 +9,6 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
 
 // Lấy dữ liệu đơn hàng từ session
 $order = $_SESSION['pending_order'] ?? null;
-// Lấy dữ liệu đơn hàng từ session
-$order = $_SESSION['pending_order'] ?? null;
 
 // Nếu reload mà session hết → hiển thị trang checkout với thông báo (không redirect)
 if (!$order) {
@@ -32,8 +30,124 @@ $delivery_mode = $order['delivery_mode'] ?? 'delivery';
 $store_address = $order['store_address'] ?? '';
 $user_info = $order['user_info'] ?? [];
 
+// Lấy username an toàn
+$username = htmlspecialchars($_SESSION['username'] ?? '');
+if (empty($username)) {
+    echo '<div class="alert" style="color:red; text-align:center; margin:20px;">Phiên đăng nhập hết hạn. Vui lòng đăng nhập lại.</div>';
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['place_order'])) {
+    $payment_method = $_POST['payment'] ?? 'cod';
+    $selected_items_post = json_decode($_POST['selected_items'] ?? '[]', true); // Lấy từ hidden field để an toàn (nhất quán với hiển thị)
+    $total_price = floatval($_POST['total_price'] ?? 0); // Từ hidden
+    $delivery_mode = $_POST['delivery_mode'] ?? 'delivery'; // Từ hidden
+
+    // Lấy user_id
+    $user_query = "SELECT id FROM users WHERE username = ?";
+    $stmt_user = $connect->prepare($user_query);
+    $stmt_user->bind_param("s", $username);
+    $stmt_user->execute();
+    $result_user = $stmt_user->get_result();
+    $user_row = $result_user->fetch_assoc();
+
+    if (!$user_row || empty($user_row['id'])) {
+        echo '<div class="alert" style="color:red; text-align:center; margin:20px;">Lỗi: Không tìm thấy tài khoản. Vui lòng đăng nhập lại.</div>';
+    } else {
+        $user_id = $user_row['id'];
+
+        // Tạo order_code
+        $order_code = 'DH' . rand(100000000, 999999999);
+        $status = 'Chờ xác nhận';
+
+        // Insert vào orders
+        $insert_order = "INSERT INTO orders (user_id, order_code, created_at, payment_method, status, total_amount, delivery_mode) 
+                         VALUES (?, ?, NOW(), ?, ?, ?, ?)";
+        $stmt_order = $connect->prepare($insert_order);
+        $stmt_order->bind_param("isssds", $user_id, $order_code, $payment_method, $status, $total_price, $delivery_mode);
+        $stmt_order->execute();
+        $order_id = $connect->insert_id; // ID đơn hàng vừa tạo
+        $stmt_order->close();
+
+        // SỬA: Insert vào order_details từ $selected_items_post (từ POST/session, không query cart DB nữa)
+        if (!empty($selected_items_post)) {
+            foreach ($selected_items_post as $item) {
+                $product_id   = $item['product_id'] ?? 0; // Giả sử có 'id' = product_id từ pending_order
+                $product_code = $item['code'] ?? ''; // Giả sử có 'code' = product_code
+                $product_name = $item['name'] ?? '';
+                $quantity     = $item['quantity'] ?? 0;
+                $unit_price   = $item['price'] ?? 0;
+
+                // Query lấy product_code từ bảng products dựa trên product_id
+                $product_code = '';
+                if ($product_id > 0) {
+                    $stmt_code = $connect->prepare("SELECT product_code FROM products WHERE prd_id = ? LIMIT 1");
+                    $stmt_code->bind_param("i", $product_id);
+                    $stmt_code->execute();
+                    $code_res = $stmt_code->get_result();
+                    if ($code_row = $code_res->fetch_assoc()) {
+                        $product_code = $code_row['product_code'] ?? '';
+                    }
+                    $stmt_code->close();
+                }
+
+                if ($product_id > 0 && $quantity > 0) { // Kiểm tra dữ liệu hợp lệ
+                    $insert_detail = "INSERT INTO order_details 
+                                      (order_id, product_id, product_code, product_name, quantity, unit_price) 
+                                      VALUES (?, ?, ?, ?, ?, ?)";
+                    $stmt_detail = $connect->prepare($insert_detail);
+                    $stmt_detail->bind_param("iissid", $order_id, $product_id, $product_code, $product_name, $quantity, $unit_price);
+                    $stmt_detail->execute();
+                    $stmt_detail->close();
+                }
+            }
+        } else {
+            echo '<div class="alert" style="color:red; text-align:center; margin:20px;">Không có món ăn nào để lưu chi tiết đơn hàng.</div>';
+        }
+
+        // Thu thập danh sách product_id đã đặt hàng (từ selected_items_post)
+        $placed_product_ids = [];
+        foreach ($selected_items_post as $item) {
+            $product_id = (int)($item['product_id'] ?? 0);
+            if ($product_id > 0) {
+                $placed_product_ids[] = $product_id;
+            }
+        }
+
+        if (!empty($placed_product_ids)) {
+            // Xóa CHỈ những product_id đã đặt hàng
+            $placeholders = implode(',', array_fill(0, count($placed_product_ids), '?'));
+            $delete_cart = "DELETE FROM cart WHERE user_id = ? AND product_id IN ($placeholders)";
+            
+            $stmt_delete = $connect->prepare($delete_cart);
+            
+            // Bind: user_id + danh sách product_id
+            $types = 'i' . str_repeat('i', count($placed_product_ids));
+            $params = array_merge([$user_id], $placed_product_ids);
+            $stmt_delete->bind_param($types, ...$params);
+            
+            $stmt_delete->execute();
+            $affected = $stmt_delete->affected_rows;
+            echo "<!-- DEBUG: Đã xóa $affected món đã đặt khỏi giỏ hàng -->"; // Để debug
+            
+            $stmt_delete->close();
+        } else {
+            // Nếu không có món nào đặt → không xóa gì
+        }
+        
+        unset($_SESSION['cart']); 
+
+        // Thành công
+        unset($_SESSION['pending_order']);
+        $_SESSION['order_success'] = "Đặt hàng thành công! Đơn hàng #$order_code đã được gửi.";
+        header("Location: profile.php?mode=order");
+        exit();
+    }
+    $stmt_user->close();
+}
 
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="vi">
@@ -120,16 +234,16 @@ $user_info = $order['user_info'] ?? [];
                             <h3>Thông tin giao hàng</h3>
                             <a href="account.php" class="change-btn">Thay đổi</a>
                         </div>
-                        <div class="customer-info">
-                            <p><strong>Họ tên:</strong> <?php echo htmlspecialchars($user_info['username'] ?? 'Chưa cập nhật'); ?></p>
-                            <p><strong>Số điện thoại:</strong> <?php echo htmlspecialchars($user_info['phone'] ?? 'Chưa cập nhật'); ?></p>
+                        <div class="customer-info" style="color: #333;">
+                            <p><strong style="color: #000000;">Họ tên:</strong> <span style="color: #797676;"><?php echo htmlspecialchars($user_info['username'] ?? 'Chưa cập nhật'); ?></span></p>
+                            <p><strong style="color: #000000;">Số điện thoại:</strong> <span style="color: #797676;"><?php echo htmlspecialchars($user_info['phone'] ?? 'Chưa cập nhật'); ?></span></p>
 
                             <?php if ($delivery_mode === 'delivery'): ?>
-                                <p><strong>Địa chỉ:</strong> <?php echo htmlspecialchars($user_info['address'] ?? 'Chưa cập nhật'); ?></p>
-                                <strong>Phương thức:</strong> Giao hàng tận nơi
+                                <p><strong style="color: #000000;">Địa chỉ:</strong> <span style="color: #797676;"><?php echo htmlspecialchars($user_info['address'] ?? 'Chưa cập nhật'); ?></span></p>
+                                <p><strong style="color: #000000;">Phương thức:</strong> <span style="color: #797676;">Giao hàng tận nơi</span></p>
                             <?php else: ?>
-                                <p><strong>Nhận tại cửa hàng:</strong> <?php echo htmlspecialchars($store_address); ?></p>
-                                <strong>Phương thức:</strong> Hẹn lấy tại cửa hàng
+                                <p><strong style="color: #000000;">Nhận tại cửa hàng:</strong> <span style="color: #797676;"><?php echo htmlspecialchars($store_address); ?></span></p>
+                                <p><strong style="color: #000000;">Phương thức:</strong> <span style="color: #797676;">Hẹn lấy tại cửa hàng</span></p>
                             <?php endif; ?>
                         </div>
                     </div>
